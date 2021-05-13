@@ -9,6 +9,11 @@ public class CentriSomministrazione {
 		this.area = area;
 		this.denominazioneStruttura = denominazioneStruttura;
 	}
+	public CentriSomministrazione(String area, Integer numCentri) {
+		this.area = area;
+		this.numCentri = numCentri;
+	}
+	
 	public String getArea() {
 		return area;
 	}

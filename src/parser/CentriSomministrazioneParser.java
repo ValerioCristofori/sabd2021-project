@@ -8,15 +8,6 @@ import entity.CentriSomministrazione;
 
 public class CentriSomministrazioneParser implements CSVParser{
 	
-	public static CentriSomministrazione parseLine( String csvLine ) {
-		String area;
-		String denominazioneStruttura;
-		
-		String[] tok = csvLine.split(",");
-		area = tok[0];
-		denominazioneStruttura = tok[1];
-		return new CentriSomministrazione( area, denominazioneStruttura );
-	}
 	
 	public static List<String> getArea( String csvLine ) {
 		String area;
@@ -25,4 +16,22 @@ public class CentriSomministrazioneParser implements CSVParser{
 		area = tok[0];
 		return Arrays.asList(area);
 	}
+	
+	public static CentriSomministrazione parseCSV(String csvLine) {
+
+		CentriSomministrazione centro = null;
+        String[] csvValues = csvLine.split(",");
+
+        if (csvValues.length != 7)
+            return null;
+
+
+        centro = new CentriSomministrazione(
+                csvValues[0], // area
+                csvValues[1] // denominazione struttura
+                
+        );
+
+        return centro;
+    }
 }

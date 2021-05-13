@@ -7,6 +7,8 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 
+import entity.CentriSomministrazione;
+import logic.processing.Query1Processing;
 import parser.CentriSomministrazioneParser;
 import scala.Tuple2;
 
@@ -16,23 +18,32 @@ public class Main {
 	private static String fileSomministrazioneVaccini = "data/somministrazioni-vaccini-summary-latest.csv";
 			
 	public static void main(String[] args) {
+		
+		query1();
+	}
+
+	private static void query1() {
+		
+		
 		SparkConf conf = new SparkConf().setAppName("Query1");
 		JavaSparkContext sc= new JavaSparkContext(conf);
-		JavaRDD<String> input = sc.textFile(filePuntiTipologia);
+		List<CentriSomministrazione> centri = Query1Processing.getTotalCenters(sc);
+		for( CentriSomministrazione c : centri ) {
+			System.out.println( c.getArea() + " ---- " + c.getNumCentri() );
+		}
 		
-		//JavaRDD<String> centriSomministrazione = input.map(line -> CentriSomministrazioneParser.parseLine(line));
-		
-		// Transformations
-        JavaRDD<String> areas = input.flatMap(line -> CentriSomministrazioneParser.getArea(line).iterator());
-        
-        JavaPairRDD<String, Integer> pairs = areas.mapToPair(area -> new Tuple2<>(area, 1));
-        JavaPairRDD<String, Integer> counts = pairs.reduceByKey((x, y) -> x+y);
-        
-        List<Tuple2<String, Integer>> output = counts.collect();
-        for (Tuple2<?,?> tuple : output) {
-          System.out.println(tuple._1() + ": " + tuple._2());
-        }
         sc.stop();
+
 	}
+
+	public static String getFilePuntiTipologia() {
+		return filePuntiTipologia;
+	}
+
+
+	public static String getFileSomministrazioneVaccini() {
+		return fileSomministrazioneVaccini;
+	}
+
 
 }
