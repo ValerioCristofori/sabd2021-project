@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Script per automatizzare il processo di run del progetto
+mvn clean package
 
 $SPARK_HOME/sbin/start-master.sh
 
