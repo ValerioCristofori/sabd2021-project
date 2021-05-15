@@ -1,9 +1,10 @@
-package logic.processing;
+package logic.query1;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.spark.sql.functions.*;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -20,9 +21,9 @@ import parser.CentriSomministrazioneParser;
 import scala.Tuple2;
 import scala.Tuple3;
 
-public class Query1Processing {
+public class Processing {
 	
-	public static Dataset<Row> getTotalCenters( SparkSession spark ){
+	public static Dataset<Row> parseCsvCentri( SparkSession spark ){
 		
 		Dataset<Row> df = spark.read()
 				.csv(Main.getFilePuntiTipologia());
@@ -33,16 +34,16 @@ public class Query1Processing {
 	    return df;
 	}
 	
-	public static Dataset<Row> getSomministrazioni( SparkSession spark ){
-		
+	public static Dataset<Row> parseCsvSomministrazioni( SparkSession spark ){
 		
 		Dataset<Row> df = spark.read()
 				.csv(Main.getFileSomministrazioneVaccini());
+		
 		df = df.withColumnRenamed("_c0", "data");
 		df = df.withColumnRenamed("_c1", "area");
 		df = df.withColumnRenamed("_c2", "totale");
 		df = df.select( "data", "area", "totale" );
-	    df.show();
+		
 	    return df;
 	}
 	
@@ -56,14 +57,15 @@ public class Query1Processing {
         JavaPairRDD<String, Integer> results = pairs.reduceByKey((x, y) -> x+y);
         Dataset<Row> dfResult = spark.createDataset( JavaPairRDD.toRDD(results), Encoders.tuple(Encoders.STRING(),Encoders.INT())).toDF();
         dfResult = dfResult.withColumnRenamed("_1", "area");
-        dfResult = dfResult.withColumnRenamed("_2", "numero_somministrazioni");
+        dfResult = dfResult.withColumnRenamed("_2", "numeroCentri");
         return dfResult;
 	}
 	
 	public static Dataset<Row> getJoinDf( Dataset<Row> dfCentri, Dataset<Row> dfSomministrazioni ){
-		dfSomministrazioni.show();
-		dfCentri.show();
-		return dfCentri.join(dfSomministrazioni, dfSomministrazioni.col("area").equalTo(dfCentri.col("area")) );
+		Dataset<Row> df = dfSomministrazioni.join( dfCentri, "area");
+		df = df.sort("area", "data");
+		return df;
+
 	}
 	
 }
