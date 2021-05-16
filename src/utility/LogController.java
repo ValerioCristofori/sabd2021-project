@@ -1,6 +1,8 @@
 package utility;
 
+
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
@@ -12,6 +14,8 @@ public class LogController {
 	private static LogController instance = null;
 	private Logger logger = Logger.getLogger( "mLogger" );
 	private FileHandler fh;
+	private static final int NUMMINUS = 35;
+	private static final String SPACE = " ";
 	
 	private LogController() throws SecurityException, IOException {
 		this.fh = new FileHandler( PATH );
@@ -28,6 +32,17 @@ public class LogController {
 	
 	public void saveMess( String message ) {
 		this.logger.info(message);
+	}
+
+	public void queryOutput( String... args ){
+		StringBuilder sb = new StringBuilder();
+		sb.append( String.format("%n+-----------------------------------+%n"));
+		for( String arg : args ){
+			String spaces = SPACE.repeat(NUMMINUS - 2 - arg.length());
+			sb.append( String.format("| " +arg+spaces+ " |%n") );
+		}
+		sb.append( String.format("+-----------------------------------+%n%n"));
+		this.logger.info(sb.toString());
 	}
 	
 	

@@ -80,7 +80,12 @@ public class Main {
 			
 			
 			for( Tuple2<String, Tuple2<String, Float> > resRow : res.collect() ) {
-				LogController.getSingletonInstance().saveMess( String.format( "Area: %s%nMese: %s%nAvg: %f%n", resRow._1, resRow._2._1, resRow._2._2) );
+				LogController.getSingletonInstance()
+						.queryOutput(
+								String.format("Area: %s", resRow._1),
+								String.format("Mese: %s",resRow._2._1),
+								String.format("Avg: %f", resRow._2._2)
+						);
 			}
 			sc.stop();
 		}
