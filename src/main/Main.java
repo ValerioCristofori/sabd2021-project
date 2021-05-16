@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -8,12 +9,14 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Encoder;
 import org.apache.spark.sql.Encoders;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
 import entity.CentriSomministrazione;
 import entity.Somministrazione;
+import logic.query1.PreProcessing;
 import logic.query1.Processing;
 import parser.CentriSomministrazioneParser;
 import scala.Tuple2;
@@ -54,13 +57,12 @@ public class Main {
 		 * preprocessing somministrazioni summary -> ordinare temporalmente
 		 */		
 		Dataset<Row> dfSomministrazioniCentri = Processing.getJoinDf(dfCentri, dfSomministrazioni);
-		dfSomministrazioniCentri.show();
-
-		Dataset<Somministrazione> dfSomm = dfSomministrazioniCentri.as( Encoders.bean(Somministrazione.class));
-		//dfSomm.show(false);
-		//JavaRDD<Somministrazione> sommRdd = dfSomm.toJavaRDD()
-		//		.filter( somm -> somm.getData().contains("2021")); // only for 2021
+		//dfSomministrazioniCentri.filter("data > 2020-12-12").groupBy( "area", "data").agg(avg(dfSomministrazioniCentri.col("totale")), count(dfSomministrazioniCentri.col("area")));
+		Dataset<Somministrazione> dfSomm = dfSomministrazioniCentri.as( Encoders.bean(Somministrazione.class) );
 		
+		JavaRDD<Somministrazione> sommRdd = dfSomm.toJavaRDD()
+				.filter( somm -> somm.getData().contains("2021")); // only for 2021
+		JavaRDD<Tuple3<String,Integer,Float>> result = sommRdd.reduce( );
 		
         sc.stop();
 

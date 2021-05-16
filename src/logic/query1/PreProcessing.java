@@ -7,12 +7,12 @@ import org.apache.spark.sql.types.StructType;
 
 public class PreProcessing {
 	
-	public StructType getSchema(){
+	public static StructType getSchema(){
 		StructField[] structFields = new StructField[]{
+                		new StructField("area", DataTypes.StringType, true, Metadata.empty()),
 		                new StructField("data", DataTypes.DateType, true, Metadata.empty()),
-		                new StructField("area", DataTypes.StringType, true, Metadata.empty()),
-		                new StructField("totaleSomministrazioni", DataTypes.IntegerType, true, Metadata.empty()),
-		                new StructField("numero", DataTypes.IntegerType, true, Metadata.empty())
+		                new StructField("totale", DataTypes.IntegerType, true, Metadata.empty()),
+		                new StructField("numeroCentri", DataTypes.IntegerType, true, Metadata.empty())
 		              
 		        };
 		        return new StructType(structFields);

@@ -8,8 +8,9 @@ public class Somministrazione implements Serializable{
 	
 	private String area; //regione di somministrazione
 	private String data; //data che specifica il giorno delle somministrazioni
-	private int totale; //totale delle vaccinazioni nel giorno
-	private int numeroCentri;
+	private String totale; //totale delle vaccinazioni nel giorno
+	private int numeroCentri; //numero di centri in quella regione
+	
 	
 	public String getArea() {
 		return area;
@@ -23,16 +24,16 @@ public class Somministrazione implements Serializable{
 	public void setData(String data) {
 		this.data = data;
 	}
-	public int getTotale() {
-		return totale;
+	public String getTotale() {
+		return this.totale;
 	}
-	public void setTotale(int totaleSomministrazioni) {
-		this.totale = totaleSomministrazioni;
+	public void setTotale(String totale) {
+		this.totale = totale;
 	}
-	public int getNumber() {
+	public int getNumeroCentri() {
 		return numeroCentri;
 	}
-	public void setNumber(int numeroCentri) {
+	public void setNumeroCentri(int numeroCentri) {
 		this.numeroCentri = numeroCentri;
 	}
 	
