@@ -16,9 +16,8 @@ import org.apache.spark.sql.SparkSession;
 
 
 import entity.Somministrazione;
-
-import logic.query1.Processing;
-
+import logic.ProcessingQ1;
+import logic.ProcessingQ2;
 import scala.Tuple2;
 
 import utility.LogController;
@@ -27,11 +26,15 @@ public class Main {
 
 	private static String filePuntiTipologia = "data/punti-somministrazione-tipologia.csv";
 	private static String fileSomministrazioneVaccini = "data/somministrazioni-vaccini-summary-latest.csv";
+	private static String fileSomministrazioneVacciniDonne = "data/somministrazioni-vaccini-latest.csv";
+
 			
 	public static void main(String[] args) throws SecurityException, IOException {
 		
 		query1();
+		query2();
 	}
+
 
 	private static void query1() throws SecurityException, IOException {
 		
@@ -46,12 +49,12 @@ public class Main {
 			/*
 			 *  prendere coppie -> Area, Numero di centri
 			 */
-			Dataset<Row> dfCentri = Processing.parseCsvCentri(spark);
-			JavaPairRDD<String, Integer> centriRdd = Processing.getTotalCenters(dfCentri);
+			Dataset<Row> dfCentri = ProcessingQ1.parseCsvCentri(spark);
+			JavaPairRDD<String, Integer> centriRdd = ProcessingQ1.getTotalCenters(dfCentri);
 			/*
 			 *  prendere triple -> Data, Area, Totale di somministrazioni 
 			 */
-			Dataset<Row> dfSomministrazioni = Processing.parseCsvSomministrazioni(spark);
+			Dataset<Row> dfSomministrazioni = ProcessingQ1.parseCsvSomministrazioni(spark);
 
 			/*
 			 * preprocessing somministrazioni summary -> ordinare temporalmente
@@ -91,6 +94,20 @@ public class Main {
 		}
 
 	}
+	
+
+	private static void query2() {
+		SparkConf conf = new SparkConf().setAppName("Query2");
+		try (JavaSparkContext sc = new JavaSparkContext(conf)) {
+			SparkSession spark = SparkSession
+				    .builder()
+				    .appName("Java Spark SQL Query2")
+				    .getOrCreate();
+		
+			Dataset<Row> dfSommDonne = ProcessingQ2.parseCsvSommDonne(spark);
+			dfSommDonne.show();
+		}
+	}
 
 	public static String getFilePuntiTipologia() {
 		return filePuntiTipologia;
@@ -99,6 +116,11 @@ public class Main {
 
 	public static String getFileSomministrazioneVaccini() {
 		return fileSomministrazioneVaccini;
+	}
+
+
+	public static String getFileSomministrazioneVacciniDonne() {
+		return fileSomministrazioneVacciniDonne;
 	}
 
 

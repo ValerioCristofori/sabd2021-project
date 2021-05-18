@@ -38,8 +38,7 @@ public class LogController {
 		StringBuilder sb = new StringBuilder();
 		sb.append( String.format("%n+-----------------------------------+%n"));
 		for( String arg : args ){
-			String spaces = SPACE.repeat(NUMMINUS - 2 - arg.length());
-			sb.append( String.format("| " +arg+spaces+ " |%n") );
+			sb.append( String.format("|  " +arg+ "%n") );
 		}
 		sb.append( String.format("+-----------------------------------+%n%n"));
 		this.logger.info(sb.toString());
