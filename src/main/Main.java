@@ -1,8 +1,10 @@
 package main;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 
+import entity.SommDonne;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -20,7 +22,10 @@ import logic.ProcessingQ1;
 import logic.ProcessingQ2;
 import scala.Tuple2;
 
+import scala.Tuple3;
 import utility.LogController;
+
+import javax.xml.crypto.Data;
 
 public class Main {
 
@@ -96,7 +101,7 @@ public class Main {
 	}
 	
 
-	private static void query2() {
+	private static void query2() throws IOException {
 		SparkConf conf = new SparkConf().setAppName("Query2");
 		try (JavaSparkContext sc = new JavaSparkContext(conf)) {
 			SparkSession spark = SparkSession
@@ -104,8 +109,33 @@ public class Main {
 				    .appName("Java Spark SQL Query2")
 				    .getOrCreate();
 		
-			Dataset<Row> dfSommDonne = ProcessingQ2.parseCsvSommDonne(spark);
+			Dataset<SommDonne> dfSommDonne = ProcessingQ2.parseCsvSommDonne(spark);
 			dfSommDonne.show();
+			JavaRDD<SommDonne> sommDonneRdd = dfSommDonne.toJavaRDD(); //forse filter
+			JavaPairRDD<Tuple3<String,String,String>, Tuple2<String, String> > result = sommDonneRdd.mapToPair(
+					somm -> new Tuple2<>(
+								new Tuple3<>( somm.getMese(), somm.getArea(), somm.getFascia()),
+								new Tuple2<>( somm.getGiorno(), somm.getTotale()) )
+					).groupByKey()
+					.reduceByKey( tuple -> {
+						Dataset<Row> train = spark.createDataFrame(Arrays.asList(tuple),Encoders.STRING()).toDF();
+						//start MLlib linear regression
+						return null;
+
+					});
+
+
+
+			for( Tuple2< Tuple3<String,String,String>, Tuple2<String, String> > resRow : result.collect() ) {
+				LogController.getSingletonInstance()
+						.queryOutput(
+								String.format("Mese: %s", resRow._1._1()),
+								String.format("Area: %s", resRow._1._2()),
+								String.format("Fascia: %s",resRow._1._3()),
+								String.format("Giorno: %s", resRow._2._1()),
+								String.format("Totale: %s",resRow._2._2())
+						);
+			}
 		}
 	}
 
