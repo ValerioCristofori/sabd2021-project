@@ -2,14 +2,21 @@ package main;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 
+import com.clearspring.analytics.util.Lists;
+import entity.PointLR;
 import entity.SommDonne;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 
+import org.apache.spark.ml.linalg.Vectors;
+import org.apache.spark.ml.regression.LinearRegression;
+import org.apache.spark.ml.regression.LinearRegressionModel;
+import org.apache.spark.ml.regression.LinearRegressionTrainingSummary;
 import org.apache.spark.sql.Dataset;
 
 import org.apache.spark.sql.Encoders;
@@ -36,7 +43,7 @@ public class Main {
 			
 	public static void main(String[] args) throws SecurityException, IOException {
 		
-		query1();
+		//query1();
 		query2();
 	}
 
@@ -112,21 +119,55 @@ public class Main {
 			Dataset<SommDonne> dfSommDonne = ProcessingQ2.parseCsvSommDonne(spark);
 			dfSommDonne.show();
 			JavaRDD<SommDonne> sommDonneRdd = dfSommDonne.toJavaRDD(); //forse filter
-			JavaPairRDD<Tuple3<String,String,String>, Tuple2<String, String> > result = sommDonneRdd.mapToPair(
+			JavaPairRDD<Tuple3<String, String, String>, Iterable<Tuple2<String, String>>> trainingData = sommDonneRdd.mapToPair(
 					somm -> new Tuple2<>(
 								new Tuple3<>( somm.getMese(), somm.getArea(), somm.getFascia()),
 								new Tuple2<>( somm.getGiorno(), somm.getTotale()) )
-					).groupByKey()
-					.reduceByKey( tuple -> {
-						Dataset<Row> train = spark.createDataFrame(Arrays.asList(tuple),Encoders.STRING()).toDF();
+					).groupByKey();
+					//.foreachPartition();
+			//result.value e' il valore predetto per il mese dopo result.kxey._1
+			JavaPairRDD<Tuple3<String,String,String>, String> result = trainingData.mapToPair( training -> {
+				LogController.getSingletonInstance().saveMess("qui");
+				List<Tuple2<String, String>> trainingList = Lists.newArrayList(training._2);
+				Dataset<Row> train = spark.createDataset(Lists.newArrayList(training._2),Encoders.tuple(Encoders.STRING(),Encoders.STRING())).toDF();
+
+				LogController.getSingletonInstance().saveMess("qua");
+				LinearRegression lr = new LinearRegression()
+						.setMaxIter(10)
+						.setRegParam(0.3)
+						.setElasticNetParam(0.8);
+				// Fit the model.
+				LinearRegressionModel lrModel = lr.fit(train);
+
+				// Print the coefficients and intercept for linear regression.
+				String printCoefficient = "Coefficients: "
+						+ lrModel.coefficients() + " Intercept: " + lrModel.intercept();
+
+				// Summarize the model over the training set and print out some metrics.
+				LinearRegressionTrainingSummary trainingSummary = lrModel.summary();
+				String printIterations = "numIterations: " + trainingSummary.totalIterations();
+				String printHistory = "objectiveHistory: " + Vectors.dense(trainingSummary.objectiveHistory());
+				trainingSummary.residuals().show();
+				String printRMSE = "RMSE: " + trainingSummary.rootMeanSquaredError();
+				String printR2 = "r2: " + trainingSummary.r2();
+				LogController.getSingletonInstance().queryOutput(
+															printCoefficient,
+															printIterations,
+															printHistory,
+															printRMSE,
+															printR2
+														);
+				return null;
+			});
+
+
+						//Dataset<Row> train = spark.createDataFrame(Arrays.asList(tuple),Encoders.STRING()).toDF();
 						//start MLlib linear regression
-						return null;
-
-					});
 
 
 
-			for( Tuple2< Tuple3<String,String,String>, Tuple2<String, String> > resRow : result.collect() ) {
+
+			/*for( Tuple2< Tuple3<String,String,String>, Tuple2<String, String> > resRow : result.collect() ) {
 				LogController.getSingletonInstance()
 						.queryOutput(
 								String.format("Mese: %s", resRow._1._1()),
@@ -135,7 +176,7 @@ public class Main {
 								String.format("Giorno: %s", resRow._2._1()),
 								String.format("Totale: %s",resRow._2._2())
 						);
-			}
+			}*/
 		}
 	}
 
