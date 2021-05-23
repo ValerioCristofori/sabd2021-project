@@ -1,17 +1,19 @@
 package entity;
 
+import java.util.Date;
+
 public class SommDonne {
-    private String mese_giorno; //01-01
+    private String data; //01-01
     private String area;
     private String fascia;
     private String totale;
 
-    public String getMese_giorno() {
-        return mese_giorno;
+    public String getData() {
+        return data;
     }
 
-    public void setMese_giorno(String mese_giorno) {
-        this.mese_giorno = mese_giorno;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getArea() {
@@ -36,12 +38,5 @@ public class SommDonne {
 
     public void setTotale(String totale) {
         this.totale = totale;
-    }
-
-    public String getMese(){
-        return this.mese_giorno.split("-")[0];
-    }
-    public String getGiorno(){
-        return this.mese_giorno.split("-")[1];
     }
 }
