@@ -12,7 +12,11 @@ import org.apache.spark.sql.SparkSession;
 
 import main.Main;
 import parser.CentriSomministrazioneParser;
+import scala.Serializable;
 import scala.Tuple2;
+import scala.Tuple3;
+
+import java.util.Comparator;
 
 
 public class ProcessingQ1 {
@@ -52,6 +56,8 @@ public class ProcessingQ1 {
         return pairs.reduceByKey((x, y) -> x+y);
         
 	}
+
+
 
 	
 }

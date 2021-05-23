@@ -3,6 +3,7 @@ package main;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import com.clearspring.analytics.util.Lists;
 import entity.PointLR;
 import entity.SommDonne;
 
+import logic.TupleComparator;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
@@ -34,6 +36,7 @@ import logic.ProcessingQ2;
 import scala.Tuple2;
 
 import scala.Tuple3;
+import scala.Tuple4;
 import utility.LogController;
 
 import javax.xml.crypto.Data;
@@ -125,66 +128,67 @@ public class Main {
 			Date gennaioData = ProcessingQ2.getFilterDate();
 		
 			Dataset<SommDonne> dfSommDonne = ProcessingQ2.parseCsvSommDonne(spark);
-			dfSommDonne.show();
-			JavaRDD<SommDonne> sommDonneRdd = dfSommDonne.toJavaRDD(); 
+			JavaRDD<SommDonne> sommDonneRdd = dfSommDonne.toJavaRDD();
 			JavaPairRDD<Tuple3<Date, String, String>, Integer > datiFiltrati = sommDonneRdd.mapToPair(
 					somm -> new Tuple2<>(
 								new Tuple3<>( simpleDateFormat.parse( somm.getData() ), somm.getArea(), somm.getFascia()),
 								Integer.valueOf( somm.getTotale() )) //filtraggio per data a partire dal 01-01-2021
-					).filter( row -> !row._1._1().before( gennaioData ));
-			
-			for( Tuple2< Tuple3<Date, String, String>, Integer > resRow : datiFiltrati.collect() ) {
-				LogController.getSingletonInstance()
-						.queryOutput(
-								String.format("Data: %s", resRow._1._1()),
-								String.format("Area: %s", resRow._1._2()),
-								String.format("Fascia: %s",resRow._1._3()),
-								String.format("Totale: %s",resRow._2.toString())
-						);
-			}
+					).filter( row -> !row._1._1().before( gennaioData )) //sommo i valori di somministrazione di tutte le entry con stessa chiave ( diversi tipi di vaccino )
+					.reduceByKey( (tuple1,tuple2) -> tuple1+tuple2);
+
 			//result.value e' il valore predetto per il mese dopo result.kxey._1
-			
 			JavaPairRDD<Tuple3<String, String, String>, SimpleRegression> trainingData =
 					datiFiltrati.mapToPair(
 	                        row -> {
 	                        	String month = simpleMonthFormat.format(row._1._1());
 	                        	long epochTime = row._1._1().getTime();
 	                        	double val = Integer.valueOf(row._2).doubleValue();
-	    	                    LogController.getSingletonInstance().saveMess( String.format("%f%n", val) );
 	                            SimpleRegression simpleRegression = new SimpleRegression();
 	                            simpleRegression.addData((double) epochTime, val);
+	                            LogController.getSingletonInstance().saveMess( String.format("Chiave %s,%s,%s%nValore %f%n", row._1._2(),row._1._3(),simpleDateFormat.format(row._1._1()),val));
 	                            return new Tuple2<>(new Tuple3<>( month, row._1._2(), row._1._3()), simpleRegression);
-	                        });
+	                        }).reduceByKey( (tuple1, tuple2) -> {
+									tuple1.append(tuple2);
+									return tuple1;
+									});
+
+
 			// nella chiave il mese e il mese successivo e il valore e il valore predetto
-			JavaPairRDD<Tuple3<String, String, String>, Integer> result =
+			JavaPairRDD<Tuple3<String,String,Integer>, String > result =
 					trainingData.mapToPair(row ->{
 	                    int monthInt = Integer.parseInt(row._1._1());
 	                    int nextMonthInt = monthInt % 12 + 1;
-	                    String stringNextMonth = String.valueOf(nextMonthInt);
-	                    String stringNextDay;
+	                    String nextMonthString = String.valueOf(nextMonthInt);
+	                    String nextDay;
 	                    if(nextMonthInt<10){
-	                    	stringNextDay = "2021-0" + nextMonthInt + "-01";
+							nextDay = "2021-0" + nextMonthInt + "-01";
 	                    } else {
-	                    	stringNextDay = "2021-" + nextMonthInt + "-01";
+							nextDay = "2021-" + nextMonthInt + "-01";
 	                    }
-	                    
-	                    long epochToPredict = simpleDateFormat.parse(stringNextDay).getTime();
-	                    LogController.getSingletonInstance().saveMess( String.format("%d%n", epochToPredict) );
+	                    LogController.getSingletonInstance().saveMess( "String to predict" + nextDay );
+	                    long epochToPredict = simpleDateFormat.parse(nextDay).getTime();
 	                    double predictedSomm = row._2.predict( (double)epochToPredict );
-	                    return new Tuple2<>(new Tuple3<>(stringNextMonth, row._1._2(),row._1._3())
-	                    					, Integer.valueOf( (int) Math.round( predictedSomm )) );
-	                });
+	                    LogController.getSingletonInstance().saveMess(String.format("Predizione per chiave %s,%s,%s%nValore %f%n",nextMonthString,row._1._2(),row._1._3(),predictedSomm));
+	                    return new Tuple2<>(new Tuple3<>(nextMonthString,row._1._3(),Integer.valueOf( (int) Math.round( predictedSomm ))), row._1._2() );
+	                }).sortByKey(
+	                		new TupleComparator<>( Comparator.<String>naturalOrder(),
+									               Comparator.<String>naturalOrder(),
+									               Comparator.<Integer>naturalOrder()),
+							false, 1);
 
 
-			for( Tuple2< Tuple3<String,String,String>, Integer > resRow : result.collect() ) {
+
+
+			for( Tuple2< Tuple3<String,String, Integer>, String> resRow : result.collect() ) {
 				LogController.getSingletonInstance()
 						.queryOutput(
 								String.format("Mese: %s", resRow._1._1()),
-								String.format("Area: %s", resRow._1._2()),
-								String.format("Fascia: %s",resRow._1._3()),
-								String.format("Totale: %s",resRow._2.toString())
+								String.format("Area: %s", resRow._2),
+								String.format("Fascia: %s",resRow._1._2()),
+								String.format("Totale: %s",resRow._1._3())
 						);
 			}
+
 		}
 	}
 
