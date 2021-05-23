@@ -2,10 +2,7 @@ package main;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 import com.clearspring.analytics.util.Lists;
@@ -23,16 +20,15 @@ import org.apache.spark.ml.linalg.Vectors;
 import org.apache.spark.ml.regression.LinearRegression;
 import org.apache.spark.ml.regression.LinearRegressionModel;
 import org.apache.spark.ml.regression.LinearRegressionTrainingSummary;
-import org.apache.spark.sql.Dataset;
-
-import org.apache.spark.sql.Encoders;
-import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SparkSession;
+import org.apache.spark.sql.*;
 
 
 import entity.Somministrazione;
 import logic.ProcessingQ1;
 import logic.ProcessingQ2;
+import org.apache.spark.sql.types.DataTypes;
+import org.apache.spark.sql.types.StructField;
+import org.apache.spark.sql.types.StructType;
 import scala.Tuple2;
 
 import scala.Tuple3;
@@ -48,10 +44,11 @@ public class Main {
 	private static String fileSomministrazioneVacciniDonne = "data/somministrazioni-vaccini-latest.csv";
 
 			
-	public static void main(String[] args) throws SecurityException, IOException {
+	public static void main(String[] args) throws SecurityException, IOException, AnalysisException {
 		
 		//query1();
-		query2();
+		//query2();
+		query3();
 	}
 
 
@@ -115,7 +112,7 @@ public class Main {
 	}
 	
 
-	private static void query2() throws IOException {
+	private static void query2() throws IOException, AnalysisException {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat simpleMonthFormat = new SimpleDateFormat("MM");
 		
@@ -126,6 +123,13 @@ public class Main {
 				    .appName("Java Spark SQL Query2")
 				    .getOrCreate();
 			Date gennaioData = ProcessingQ2.getFilterDate();
+
+			List<StructField> listfields = new ArrayList<>();
+			listfields.add(DataTypes.createStructField("data", DataTypes.StringType, false));
+			listfields.add(DataTypes.createStructField("fascia", DataTypes.StringType, false));
+			listfields.add(DataTypes.createStructField("area", DataTypes.StringType, false));
+			listfields.add(DataTypes.createStructField("somministrazioni_previste", DataTypes.IntegerType, false));
+			StructType resultStruct = DataTypes.createStructType(listfields);
 		
 			Dataset<SommDonne> dfSommDonne = ProcessingQ2.parseCsvSommDonne(spark);
 			JavaRDD<SommDonne> sommDonneRdd = dfSommDonne.toJavaRDD();
@@ -145,7 +149,7 @@ public class Main {
 	                        	double val = Integer.valueOf(row._2).doubleValue();
 	                            SimpleRegression simpleRegression = new SimpleRegression();
 	                            simpleRegression.addData((double) epochTime, val);
-	                            LogController.getSingletonInstance().saveMess( String.format("Chiave %s,%s,%s%nValore %f%n", row._1._2(),row._1._3(),simpleDateFormat.format(row._1._1()),val));
+	                            //LogController.getSingletonInstance().saveMess( String.format("Chiave %s,%s,%s%nValore %f%n", row._1._2(),row._1._3(),simpleDateFormat.format(row._1._1()),val));
 	                            return new Tuple2<>(new Tuple3<>( month, row._1._2(), row._1._3()), simpleRegression);
 	                        }).reduceByKey( (tuple1, tuple2) -> {
 									tuple1.append(tuple2);
@@ -159,16 +163,10 @@ public class Main {
 	                    int monthInt = Integer.parseInt(row._1._1());
 	                    int nextMonthInt = monthInt % 12 + 1;
 	                    String nextMonthString = String.valueOf(nextMonthInt);
-	                    String nextDay;
-	                    if(nextMonthInt<10){
-							nextDay = "2021-0" + nextMonthInt + "-01";
-	                    } else {
-							nextDay = "2021-" + nextMonthInt + "-01";
-	                    }
-	                    LogController.getSingletonInstance().saveMess( "String to predict" + nextDay );
+	                    String nextDay = getNextDayToPredict(nextMonthInt);
 	                    long epochToPredict = simpleDateFormat.parse(nextDay).getTime();
 	                    double predictedSomm = row._2.predict( (double)epochToPredict );
-	                    LogController.getSingletonInstance().saveMess(String.format("Predizione per chiave %s,%s,%s%nValore %f%n",nextMonthString,row._1._2(),row._1._3(),predictedSomm));
+	                    //LogController.getSingletonInstance().saveMess(String.format("Predizione per chiave %s,%s,%s%nValore %f%n",nextMonthString,row._1._2(),row._1._3(),predictedSomm));
 	                    return new Tuple2<>(new Tuple3<>(nextMonthString,row._1._3(),Integer.valueOf( (int) Math.round( predictedSomm ))), row._1._2() );
 	                }).sortByKey(
 	                		new TupleComparator<>( Comparator.<String>naturalOrder(),
@@ -177,20 +175,44 @@ public class Main {
 							false, 1);
 
 
+			JavaPairRDD<Tuple2<String, String>, Tuple2<String, Integer>> classifiedResult = result.mapToPair(row -> new Tuple2<>( new Tuple2<>(
+																																				row._1._1(),
+																																				row._1._2()),
+																																		 new Tuple2<>(
+																																				 row._2,
+																																				 row._1._3()
+
+																																		 )
+																																				));
 
 
-			for( Tuple2< Tuple3<String,String, Integer>, String> resRow : result.collect() ) {
+			/*Dataset<Row> dfResult = spark.createDataFrame( result.map(row -> RowFactory.create( getNextDayToPredict(row._1._1()),
+																								row._1._2(),
+																								row._2,
+																								row._1._3())
+																								),
+																						resultStruct);*/
+
+			for( Tuple2<Tuple2<String, String>, Tuple2<String, Integer>> resRow : classifiedResult.collect() ) {
 				LogController.getSingletonInstance()
 						.queryOutput(
-								String.format("Mese: %s", resRow._1._1()),
-								String.format("Area: %s", resRow._2),
+								String.format("Mese: %s", resRow._1._1),
+								String.format("Area: %s", resRow._2._1),
 								String.format("Fascia: %s",resRow._1._2()),
-								String.format("Totale: %s",resRow._1._3())
+								String.format("Totale: %s",resRow._2._2)
+								//String.format("Index: %d",resRow._2)
+
 						);
 			}
 
 		}
 	}
+
+
+
+	private static void query3() {
+	}
+
 
 	public static String getFilePuntiTipologia() {
 		return filePuntiTipologia;
@@ -204,6 +226,20 @@ public class Main {
 
 	public static String getFileSomministrazioneVacciniDonne() {
 		return fileSomministrazioneVacciniDonne;
+	}
+
+	public static String getNextDayToPredict(int month){
+		if(month<10){
+			return "2021-0" + month + "-01";
+		}
+		return "2021-" + month + "-01";
+	}
+
+	public static String getNextDayToPredict(String month){
+		if( Integer.valueOf(month)<10){
+			return "2021-0" + month + "-01";
+		}
+		return "2021-" + month + "-01";
 	}
 
 

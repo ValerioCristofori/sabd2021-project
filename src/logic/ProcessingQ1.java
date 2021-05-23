@@ -11,12 +11,17 @@ import org.apache.spark.sql.SparkSession;
 
 
 import main.Main;
+import org.apache.spark.sql.types.DataTypes;
+import org.apache.spark.sql.types.StructField;
+import org.apache.spark.sql.types.StructType;
 import parser.CentriSomministrazioneParser;
 import scala.Serializable;
 import scala.Tuple2;
 import scala.Tuple3;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 
 public class ProcessingQ1 {
