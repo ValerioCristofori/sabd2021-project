@@ -27,7 +27,7 @@ import java.util.List;
 public class ProcessingQ1 {
 	
 	public static Dataset<Row> parseCsvCentri( SparkSession spark ){
-		
+		// creo dataset con le colonne (area, denominazione_struttra) del file csv
 		Dataset<Row> df = spark.read()
 				.csv(Main.getFilePuntiTipologia());
 		
@@ -38,7 +38,8 @@ public class ProcessingQ1 {
 	}
 	
 	public static Dataset<Row> parseCsvSomministrazioni( SparkSession spark ){
-		
+		// creo dataset con le colonne (data, area, totale) del file csv
+		// successivamente ordino le entry per area e data
 		Dataset<Row> df = spark.read()
 				.csv(Main.getFileSomministrazioneVaccini());
 		
@@ -52,7 +53,7 @@ public class ProcessingQ1 {
 
 	
 	public static JavaPairRDD<String, Integer> getTotalCenters( Dataset<Row> df ){
-		
+		// dal primo file csv trovo il numero di centri vaccinali per ogni area
 		JavaRDD<String> input = df.select("area").javaRDD().map(row -> (String)row.get(0));
 		
 		// Transformations
