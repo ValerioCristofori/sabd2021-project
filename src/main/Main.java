@@ -6,11 +6,14 @@ import java.util.*;
 
 
 import com.clearspring.analytics.util.Lists;
+import com.google.common.collect.Iterables;
 import entity.PointLR;
 import entity.SommDonne;
 
 import logic.TupleComparator;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
+import org.apache.spark.HashPartitioner;
+import org.apache.spark.Partitioner;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -47,8 +50,8 @@ public class Main {
 	public static void main(String[] args) throws SecurityException, IOException, AnalysisException {
 		
 		//query1();
-		//query2();
-		query3();
+		query2();
+		//query3();
 	}
 
 
@@ -173,37 +176,38 @@ public class Main {
 									               Comparator.<String>naturalOrder(),
 									               Comparator.<Integer>naturalOrder()),
 							false, 1);
-
-
-			JavaPairRDD<Tuple2<String, String>, Tuple2<String, Integer>> classifiedResult = result.mapToPair(row -> new Tuple2<>( new Tuple2<>(
+			
+			List<Tuple2<Tuple2<String, String>, Tuple2<String, Integer>>> classifiedResult = result.mapToPair(row -> new Tuple2<>( new Tuple2<>(
 																																				row._1._1(),
 																																				row._1._2()),
-																																		 new Tuple2<>(
-																																				 row._2,
-																																				 row._1._3()
 
-																																		 )
-																																				));
+																																			new Tuple2<>(
+																																				 row._2,     /* area */
+																																					row._1._3())  /* totale somministrazioni */
+																																		 	)).take(5);
+			JavaPairRDD<Tuple2<String, String>, Tuple2<String, Integer> > rank = sc.parallelizePairs(classifiedResult);
 
 
-			/*Dataset<Row> dfResult = spark.createDataFrame( result.map(row -> RowFactory.create( getNextDayToPredict(row._1._1()),
-																								row._1._2(),
-																								row._2,
-																								row._1._3())
-																								),
-																						resultStruct);*/
 
-			for( Tuple2<Tuple2<String, String>, Tuple2<String, Integer>> resRow : classifiedResult.collect() ) {
+			Dataset<Row> dfResult = spark.createDataFrame( rank
+					.map(row -> RowFactory.create( getNextDayToPredict(row._1._1()),
+													row._1._2(),
+													row._2._1,
+													row._2._2)), resultStruct);
+			dfResult.show(100);
+			for( Tuple2<Tuple2<String, String>, Tuple2<String, Integer>> resRow : rank.collect() ) {
+
 				LogController.getSingletonInstance()
 						.queryOutput(
 								String.format("Mese: %s", resRow._1._1),
+
+								String.format("Fascia: %s",resRow._1._2),
 								String.format("Area: %s", resRow._2._1),
-								String.format("Fascia: %s",resRow._1._2()),
 								String.format("Totale: %s",resRow._2._2)
-								//String.format("Index: %d",resRow._2)
 
 						);
 			}
+
 
 		}
 	}
