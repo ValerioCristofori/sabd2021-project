@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bb55d91e-7b16-4b68-bc53-1ff084126684" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/trunk/src/logic/ProcessingQ1.java" beforeDir="false" afterPath="$PROJECT_DIR$/trunk/src/logic/ProcessingQ1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trunk/src/logic/ProcessingQ2.java" beforeDir="false" afterPath="$PROJECT_DIR$/trunk/src/logic/ProcessingQ2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trunk/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/trunk/src/main/Main.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1snMb7BRQ7sjbLeHnFQQhnIAeBB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\Titti\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\Users\Titti\Desktop\sabd" />
+          <option name="myCopyRoot" value="C:\Users\Titti\Desktop\sabd" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\Users\Titti\Desktop\sabd" />
+          <option name="myCopyRoot" value="C:\Users\Titti\Desktop\sabd" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bb55d91e-7b16-4b68-bc53-1ff084126684" name="Default Changelist" comment="" />
+      <created>1621503969819</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1621503969819</updated>
+    </task>
+    <servers />
+  </component>
+</project>
