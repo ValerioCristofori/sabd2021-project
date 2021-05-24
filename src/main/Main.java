@@ -56,7 +56,8 @@ public class Main {
 
 
 	private static void query1() throws SecurityException, IOException {
-		
+		// Q1: partendo dai file csv, per ogni mese e area, calcolare le somministrazioni medie giornaliere in un centro generico
+		// vengono considerati i dati a partire dal 2021-01-01
 		
 		SparkConf conf = new SparkConf().setAppName("Query1");
 		try (JavaSparkContext sc = new JavaSparkContext(conf)) {
@@ -64,25 +65,23 @@ public class Main {
 				    .builder()
 				    .appName("Java Spark SQL Query1")
 				    .getOrCreate();
-			
-			/*
-			 *  prendere coppie -> Area, Numero di centri
-			 */
+
+			// prendere coppie (area, numero di centri)
+
 			Dataset<Row> dfCentri = ProcessingQ1.parseCsvCentri(spark);
 			JavaPairRDD<String, Integer> centriRdd = ProcessingQ1.getTotalCenters(dfCentri);
-			/*
-			 *  prendere triple -> Data, Area, Totale di somministrazioni 
-			 */
+
+			// prendere triple (data, area, numero di somministrazioni)
+
 			Dataset<Row> dfSomministrazioni = ProcessingQ1.parseCsvSomministrazioni(spark);
 
-			/*
-			 * preprocessing somministrazioni summary -> ordinare temporalmente
-			 */		
+			// preprocessing somministrazioni summary -> ordinare temporalmente
+
 			Dataset<Somministrazione> dfSomm = dfSomministrazioni.as( Encoders.bean(Somministrazione.class) );
 			JavaRDD<Somministrazione> sommRdd = dfSomm.toJavaRDD()
-					.filter( somm -> somm.getData().contains("2021")); // only for 2021
+					.filter( somm -> somm.getData().contains("2021")); // filtro solo per il 2021
 			
-			JavaPairRDD<Tuple2<String,String>,Tuple2<Integer,Integer>> process = sommRdd
+			JavaPairRDD<Tuple2<String,String>,Tuple2<Integer,Integer>> process = sommRdd // process: <<area, mese> <somministrazioni, 1>>
 					.mapToPair(somm -> new Tuple2<>(new Tuple2<>(somm.getArea(),somm.getMese()), new Tuple2<>( Integer.valueOf(somm.getTotale()), 1 ) ) )
 					.reduceByKey( (tuple1, tuple2) -> new Tuple2<>( (tuple1._1 + tuple2._1), (tuple1._2 + tuple2._2) ));
 			JavaPairRDD<Tuple2<String,String>, Float> avgRdd = process.mapToPair( tuple -> {
@@ -116,6 +115,13 @@ public class Main {
 	
 
 	private static void query2() throws IOException, AnalysisException {
+		// Q2: partendo dal file csv, per le donne e per ogni mese,
+		// fare una classifica delle prime 5 aree per cui si prevede il maggior numero di somministrazioni il primo giorno del mese successivo
+		// si considerano i dati di un mese per predire il mese successivo (partendo da gennaio 2021)
+		// tutto questo per ogni mese, per ogni area, per ogni fascia
+		// per la predizione si sfrutta la regressione lineare
+
+
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat simpleMonthFormat = new SimpleDateFormat("MM");
 		
@@ -139,11 +145,11 @@ public class Main {
 			JavaPairRDD<Tuple3<Date, String, String>, Integer > datiFiltrati = sommDonneRdd.mapToPair(
 					somm -> new Tuple2<>(
 								new Tuple3<>( simpleDateFormat.parse( somm.getData() ), somm.getArea(), somm.getFascia()),
-								Integer.valueOf( somm.getTotale() )) //filtraggio per data a partire dal 01-01-2021
-					).filter( row -> !row._1._1().before( gennaioData )) //sommo i valori di somministrazione di tutte le entry con stessa chiave ( diversi tipi di vaccino )
+								Integer.valueOf( somm.getTotale() )) // filtro a partire dal 2021-01-01
+					).filter( row -> !row._1._1().before( gennaioData )) // sommo i valori di somministrazione di tutte le entry con stessa chiave (diversi tipi di vaccino)
 					.reduceByKey( (tuple1,tuple2) -> tuple1+tuple2);
 
-			//result.value e' il valore predetto per il mese dopo result.kxey._1
+			//result.value = il valore predetto per il mese dopo result.key._1
 			JavaPairRDD<Tuple3<String, String, String>, SimpleRegression> trainingData =
 					datiFiltrati.mapToPair(
 	                        row -> {
@@ -160,7 +166,7 @@ public class Main {
 									});
 
 
-			// nella chiave il mese e il mese successivo e il valore e il valore predetto
+			// nella chiave: mese = mese successivo, valore = valore predetto
 			JavaPairRDD<Tuple3<String,String,Integer>, String > result =
 					trainingData.mapToPair(row ->{
 	                    int monthInt = Integer.parseInt(row._1._1());
