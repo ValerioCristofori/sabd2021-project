@@ -5,24 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-import com.clearspring.analytics.util.Lists;
-import com.google.common.collect.Iterables;
-import entity.PointLR;
 import entity.SommDonne;
 
+import logic.ProcessingQ3;
 import logic.TupleComparator;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
-import org.apache.spark.HashPartitioner;
-import org.apache.spark.Partitioner;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 
-import org.apache.spark.ml.linalg.Vectors;
-import org.apache.spark.ml.regression.LinearRegression;
-import org.apache.spark.ml.regression.LinearRegressionModel;
-import org.apache.spark.ml.regression.LinearRegressionTrainingSummary;
 import org.apache.spark.sql.*;
 
 
@@ -35,23 +27,22 @@ import org.apache.spark.sql.types.StructType;
 import scala.Tuple2;
 
 import scala.Tuple3;
-import scala.Tuple4;
 import utility.LogController;
-
-import javax.xml.crypto.Data;
 
 public class Main {
 
 	private static String filePuntiTipologia = "data/punti-somministrazione-tipologia.csv";
 	private static String fileSomministrazioneVaccini = "data/somministrazioni-vaccini-summary-latest.csv";
 	private static String fileSomministrazioneVacciniDonne = "data/somministrazioni-vaccini-latest.csv";
+	private static String fileTotalePopolazione = "data/totale-popolazione.csv";
 
-			
+
+
 	public static void main(String[] args) throws SecurityException, IOException, AnalysisException {
 		
 		//query1();
-		query2();
-		//query3();
+		//query2();
+		query3();
 	}
 
 
@@ -182,7 +173,7 @@ public class Main {
 									               Comparator.<String>naturalOrder(),
 									               Comparator.<Integer>naturalOrder()),
 							false, 1);
-			
+
 			List<Tuple2<Tuple2<String, String>, Tuple2<String, Integer>>> classifiedResult = result.mapToPair(row -> new Tuple2<>( new Tuple2<>(
 																																				row._1._1(),
 																																				row._1._2()),
@@ -191,6 +182,7 @@ public class Main {
 																																				 row._2,     /* area */
 																																					row._1._3())  /* totale somministrazioni */
 																																		 	)).take(5);
+
 			JavaPairRDD<Tuple2<String, String>, Tuple2<String, Integer> > rank = sc.parallelizePairs(classifiedResult);
 
 
@@ -221,6 +213,72 @@ public class Main {
 
 
 	private static void query3() {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		SparkConf conf = new SparkConf().setAppName("Query3");
+		try (JavaSparkContext sc = new JavaSparkContext(conf)) {
+			SparkSession spark = SparkSession
+					.builder()
+					.appName("Java Spark SQL Query3")
+					.getOrCreate();
+
+			// non serve filtro su data
+			// prendo dati dal 27 dicembre
+			// forse serve dire qualcosa sul 1 giugno - valore da predire
+
+			List<StructField> resultfields = new ArrayList<>();
+			resultfields.add(DataTypes.createStructField("region", DataTypes.StringType, false));
+			resultfields.add(DataTypes.createStructField("cluster", DataTypes.IntegerType, false));
+			StructType resultStruct = DataTypes.createStructType(resultfields);
+			/*
+			 * prendere coppie (area, popolazione) da totale-popolazione
+			 */
+			Dataset<Row> dfPopolazione = ProcessingQ3.parseCsvTotalePopolazione(spark);
+			JavaRDD<Row> totPopolazioneRdd = dfPopolazione.toJavaRDD();
+			JavaPairRDD<String, Long> totalePopolazione = totPopolazioneRdd.mapToPair(
+					row -> new Tuple2<>(row.getString(0), row.getLong(1)));
+
+
+			Dataset<Row> dfSomministrazioni = ProcessingQ1.parseCsvSomministrazioni(spark);
+			Dataset<Somministrazione> dfSomm = dfSomministrazioni.as(Encoders.bean(Somministrazione.class));
+			JavaRDD<Somministrazione> sommRdd = dfSomm.toJavaRDD();
+
+			// prendere Regione, (data, vaccinazioni)
+			// e devo filtrare per isBefore giugno 2021
+			// giugno2021 lo faccio in processingQ3
+			JavaPairRDD<String, Tuple2<Date, Long>> areaDateSomm = sommRdd.mapToPair(somm -> new Tuple2<>(somm.getArea(),
+					new Tuple2<>(simpleDateFormat.parse(somm.getData()), Long.valueOf(somm.getTotale())))).filter(row -> row._2._1.before(ProcessingQ3.getFilterDate())).mapToPair(null);
+			// prendo la somma delle vaccinazioni per regione
+			//JavaPairRDD<String, Long> areaSomm = areaDateSomm.reduceByKey((tuple1, tuple2) ->
+			//		tuple1._2 + tuple2._2).mapToPair(row -> new Tuple2<>(row._1, row._2._2));
+
+			// prendo (regione, regressione lineare)
+			// faccio regressione per stimare vaccinazioni giornaliere per giugno
+			JavaPairRDD<String, SimpleRegression> areaRegression = areaDateSomm.mapToPair(row -> {
+				SimpleRegression simpleRegression = new SimpleRegression();
+				LogController.getSingletonInstance().saveMess(String.format("%f", (double) (row._2._1.getTime() / 1000)));
+				simpleRegression.addData((double) (row._2._1.getTime() / 1000), row._2._2);
+				return new Tuple2<>(row._1, simpleRegression);
+			}).reduceByKey((a, b) -> {
+				a.append(b);
+				return a;
+			});
+
+			JavaPairRDD<String, Long> regionVaccinationsPred = areaRegression.mapToPair(
+					row -> {
+						long epochToPredict = ProcessingQ3.getFilterDate().getTime();
+						return new Tuple2<>(row._1, (long) row._2.predict((double) epochToPredict));
+					}).union(areaDateSomm.mapToPair(row -> new Tuple2<>(row._1, row._2._2)));
+
+			JavaPairRDD<String, Long> sommaVaccinazioni = regionVaccinationsPred.reduceByKey((tuple1, tuple2) -> tuple1 + tuple2);
+
+			JavaPairRDD<String, Double> percentualeVaccinati = sommaVaccinazioni
+					.join(totalePopolazione)
+					.mapToPair(row -> new Tuple2<>(row._1, (double) row._2._1 / row._2._2));
+
+
+		}
+
 	}
 
 
@@ -236,6 +294,10 @@ public class Main {
 
 	public static String getFileSomministrazioneVacciniDonne() {
 		return fileSomministrazioneVacciniDonne;
+	}
+
+	public static String getFileTotalePopolazione() {
+		return fileTotalePopolazione;
 	}
 
 	public static String getNextDayToPredict(int month){
