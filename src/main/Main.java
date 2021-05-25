@@ -1,6 +1,9 @@
 package main;
 
 import java.io.IOException;
+import java.lang.Double;
+import java.lang.Float;
+import java.lang.Long;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -9,12 +12,19 @@ import entity.SommDonne;
 
 import logic.ProcessingQ3;
 import logic.TupleComparator;
+import logic.kmeans.BisectingKMeansCustom;
+import logic.kmeans.KMeansCustom;
+import logic.kmeans.KMeansInterface;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 
+import org.apache.spark.mllib.clustering.BisectingKMeans;
+import org.apache.spark.mllib.clustering.KMeans;
+import org.apache.spark.mllib.linalg.Vectors;
+import org.apache.spark.mllib.linalg.Vector;
 import org.apache.spark.sql.*;
 
 
@@ -24,9 +34,8 @@ import logic.ProcessingQ2;
 import org.apache.spark.sql.types.DataTypes;
 import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
-import scala.Tuple2;
+import scala.*;
 
-import scala.Tuple3;
 import utility.LogController;
 
 public class Main {
@@ -212,9 +221,22 @@ public class Main {
 
 
 
-	private static void query3() {
+	private static void query3() throws IOException {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String[] kMeansAlgo = {"KMeans", "BisectingKMeans"};
 
+		/*
+		List<StructField> listfields = new ArrayList<>();
+		listfields.add(DataTypes.createStructField("algoritmo", DataTypes.StringType, false));
+		listfields.add(DataTypes.createStructField("valoreCluster", DataTypes.IntegerType, false));
+		listfields.add(DataTypes.createStructField("area", DataTypes.StringType, false));
+		listfields.add(DataTypes.createStructField("percentualeVaccinazioni", DataTypes.DoubleType, false));
+		listfields.add(DataTypes.createStructField("predCluster", DataTypes.IntegerType, false));
+		listfields.add(DataTypes.createStructField("trainCost", DataTypes.DoubleType, false));
+		listfields.add(DataTypes.createStructField("wssse", DataTypes.DoubleType, false));
+
+		StructType resultStruct = DataTypes.createStructType(listfields);
+*/
 		SparkConf conf = new SparkConf().setAppName("Query3");
 		try (JavaSparkContext sc = new JavaSparkContext(conf)) {
 			SparkSession spark = SparkSession
@@ -236,7 +258,7 @@ public class Main {
 			Dataset<Row> dfPopolazione = ProcessingQ3.parseCsvTotalePopolazione(spark);
 			JavaRDD<Row> totPopolazioneRdd = dfPopolazione.toJavaRDD();
 			JavaPairRDD<String, Long> totalePopolazione = totPopolazioneRdd.mapToPair(
-					row -> new Tuple2<>(row.getString(0), row.getLong(1)));
+					row -> new Tuple2<>(row.getString(0), Long.valueOf(row.getLong(1))));
 
 
 			Dataset<Row> dfSomministrazioni = ProcessingQ1.parseCsvSomministrazioni(spark);
@@ -275,6 +297,62 @@ public class Main {
 			JavaPairRDD<String, Double> percentualeVaccinati = sommaVaccinazioni
 					.join(totalePopolazione)
 					.mapToPair(row -> new Tuple2<>(row._1, (double) row._2._1 / row._2._2));
+
+			JavaPairRDD<String, Vector> areaSommVettore = percentualeVaccinati
+					.mapToPair(row -> new Tuple2<>(row._1, Vectors.dense(row._2)));
+
+			JavaRDD<Vector> dataset = areaSommVettore.map(row -> row._2);
+
+			// Raggruppare dati in K cluster da 2 a 5 attraverso K-Means
+			// scelgo tra i due algoritmi
+
+			// creo dataset per inserire colonne del resultStruct
+			List<Tuple7<String,Integer,String,Double,Integer,Double,Double>> result = new ArrayList<>();
+			KMeansInterface kMeans = null;
+
+			for (int i = 0; i < kMeansAlgo.length; i++){
+
+				switch (i){
+					case 0: // uso KMeans
+						LogController.getSingletonInstance().saveMess("Uso KMeans");
+						kMeans = new KMeansCustom();
+						break;
+					case 1: // uso BisectingKMeans
+						LogController.getSingletonInstance().saveMess("Uso Bisecting KMeans");
+						kMeans = new BisectingKMeansCustom();
+						break;
+					default:
+						LogController.getSingletonInstance().saveMess("{***}Uscita con errore (Kmeans null value)");
+						System.exit(1);
+				}
+				for( int k=2; k<=5; k++){
+
+					kMeans.train(dataset, Integer.valueOf(k), 20);
+					LogController.getSingletonInstance().saveMess(String.valueOf(k));
+					// perche kmeans gne piace???
+					KMeansInterface finalKMeans = kMeans;
+					JavaPairRDD<String, Integer> areaCluster = areaSommVettore.mapToPair(row ->
+							new Tuple2<>(row._1, finalKMeans.predict(row._2)));
+					// get trainCost , get wssse
+					JavaPairRDD<String, Tuple2<Tuple3<Integer, Double, Double>, Double>> areaClusterCosti = areaCluster
+							.mapToPair( row -> new Tuple2<>( row._1, new Tuple3<>( row._2, finalKMeans.getCost(), finalKMeans.getWSSSE(dataset) )))
+							.join(percentualeVaccinati);
+
+
+					// su ogni riga di result metto i valori degli attributi
+
+					int finalI = i;
+					int finalK = k;
+					areaClusterCosti.foreach(row -> result.add(new Tuple7<>(kMeansAlgo[finalI], finalK, row._1, row._2._2, row._2._1._1(), row._2._1._2(), row._2._1._3())) );
+
+				}
+			}
+
+			for( Tuple7<String,Integer,String,Double,Integer,Double,Double> entry : result ){
+				LogController.getSingletonInstance().queryOutput(
+						entry._1(),entry._2().toString(),entry._3(),entry._4().toString(),entry._5().toString(), entry._6().toString(),entry._7().toString()
+				);
+			}
 
 
 		}
