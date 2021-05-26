@@ -46,8 +46,8 @@ public class Main {
 	public static void main(String[] args) throws SecurityException, IOException, AnalysisException {
 		
 		//query1();
-		query2();
-		//query3();
+		//query2();
+		query3();
 	}
 
 
@@ -110,7 +110,7 @@ public class Main {
 	}
 	
 
-	private static void query2() throws IOException, AnalysisException {
+	private static void query2() throws IOException {
 		// Q2: partendo dal file csv, per le donne e per ogni mese,
 		// fare una classifica delle prime 5 aree per cui si prevede il maggior numero di somministrazioni il primo giorno del mese successivo
 		// si considerano i dati di un mese per predire il mese successivo (partendo da gennaio 2021)
@@ -193,18 +193,6 @@ public class Main {
 
 
 
-/*
-
-			JavaPairRDD<Tuple2<String, String>, Tuple2<String, Integer> > rank = sc.parallelizePairs(risultatoClassificato);
-
-
-
-			Dataset<Row> dfResult = spark.createDataFrame( rank
-					.map(row -> RowFactory.create( getNextDayToPredict(row._1._1()),
-													row._1._2(),
-													row._2._1,
-													row._2._2)), resultStruct);
-			dfResult.show(100);*/
 			for( Tuple2<Tuple2<String,String>, ArrayList<Tuple2<String,Integer>>> resRow : rank.collect() )
 				for( Tuple2<String,Integer> top5 : resRow._2)
 					LogController.getSingletonInstance()

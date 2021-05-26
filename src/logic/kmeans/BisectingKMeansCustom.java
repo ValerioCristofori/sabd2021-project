@@ -8,10 +8,6 @@ import org.apache.spark.mllib.linalg.Vector;
 public class BisectingKMeansCustom extends KMeansAbstract {
     private BisectingKMeansModel bisectingKMeansModel;
 
-    public BisectingKMeansCustom() {
-        this.bisectingKMeansModel = null;
-    }
-
     @Override
     public void train(JavaRDD<Vector> dataset, Integer k, Integer iterations) {
         BisectingKMeans bisectingKMeans = new BisectingKMeans();

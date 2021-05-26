@@ -11,10 +11,6 @@ import java.io.Serializable;
 public class KMeansCustom extends KMeansAbstract {
     private KMeansModel kMeansModel;
 
-    public KMeansCustom() {
-        this.kMeansModel = null;
-    }
-
     @Override
     public void train(JavaRDD<Vector> dataset, Integer k, Integer iterations) {
         this.kMeansModel = KMeans.train(dataset.rdd(), k, iterations);

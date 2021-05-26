@@ -40,7 +40,6 @@ public class ProcessingQ3 {
     }
 
     public static Date getFilterDate() throws IOException {
-        // boh, necessaria???
         Calendar giugno2021 = Calendar.getInstance();
         giugno2021.set(Calendar.YEAR, 2021);
         giugno2021.set(Calendar.MONTH, Calendar.JUNE);

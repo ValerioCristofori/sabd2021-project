@@ -1,2250 +1,2352 @@
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 90+
-|  Area: SIC
-|  Totale: 357
+|  FVG
+|  [0.4425807484944772]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 90+
-|  Area: VEN
-|  Totale: 281
+|  PIE
+|  [0.45440172610285945]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 90+
-|  Area: CAM
-|  Totale: 269
+|  VDA
+|  [0.4568788086686307]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 90+
-|  Area: LIG
-|  Totale: 88
+|  TOS
+|  [0.4349793216700883]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 90+
-|  Area: SAR
-|  Totale: 65
+|  VEN
+|  [0.45234750341734375]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 80-89
-|  Area: SIC
-|  Totale: 1023
+|  CAL
+|  [0.38851739975118865]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 80-89
-|  Area: CAM
-|  Totale: 571
+|  CAM
+|  [0.4087124119174775]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 80-89
-|  Area: LAZ
-|  Totale: 349
+|  SIC
+|  [0.37480695642689466]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 80-89
-|  Area: LIG
-|  Totale: 224
+|  MAR
+|  [0.46028522598151334]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 80-89
-|  Area: PAT
-|  Totale: 180
+|  MOL
+|  [0.4943702010136673]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 70-79
-|  Area: LOM
-|  Totale: 4608
+|  UMB
+|  [0.4512498656089562]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 70-79
-|  Area: VEN
-|  Totale: 1938
+|  PAB
+|  [0.44528634196153377]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 70-79
-|  Area: SIC
-|  Totale: 1911
+|  LIG
+|  [0.5040670815105261]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 70-79
-|  Area: LAZ
-|  Totale: 1819
+|  PAT
+|  [0.4254889902614985]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 70-79
-|  Area: TOS
-|  Totale: 1443
+|  ABR
+|  [0.454217681146791]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 60-69
-|  Area: TOS
-|  Totale: 10034
+|  SAR
+|  [0.3994349982011294]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 60-69
-|  Area: EMR
-|  Totale: 9497
+|  BAS
+|  [0.4435798304902124]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 60-69
-|  Area: LOM
-|  Totale: 9120
+|  LAZ
+|  [0.43464196241222375]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 60-69
-|  Area: PIE
-|  Totale: 7927
+|  LOM
+|  [0.45159974042318884]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 60-69
-|  Area: PUG
-|  Totale: 6681
+|  EMR
+|  [0.46124966792627864]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:22:18 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 50-59
-|  Area: CAM
-|  Totale: 14058
+|  PUG
+|  [0.44725435715575346]
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 50-59
-|  Area: SIC
-|  Totale: 11597
+|  KMeansCustom
+|  2
+|  FVG
+|  0.4425807484944772
+|  1
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 50-59
-|  Area: LAZ
-|  Totale: 11518
+|  KMeansCustom
+|  2
+|  PIE
+|  0.45440172610285945
+|  1
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 50-59
-|  Area: VEN
-|  Totale: 10708
+|  KMeansCustom
+|  2
+|  VDA
+|  0.4568788086686307
+|  1
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 50-59
-|  Area: LOM
-|  Totale: 7981
+|  KMeansCustom
+|  2
+|  TOS
+|  0.4349793216700883
+|  1
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 40-49
-|  Area: CAM
-|  Totale: 5818
+|  KMeansCustom
+|  2
+|  VEN
+|  0.45234750341734375
+|  1
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 40-49
-|  Area: LAZ
-|  Totale: 5295
+|  KMeansCustom
+|  2
+|  CAL
+|  0.38851739975118865
+|  0
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 40-49
-|  Area: LOM
-|  Totale: 5155
+|  KMeansCustom
+|  2
+|  CAM
+|  0.4087124119174775
+|  0
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 40-49
-|  Area: SIC
-|  Totale: 3128
+|  KMeansCustom
+|  2
+|  SIC
+|  0.37480695642689466
+|  0
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 40-49
-|  Area: PIE
-|  Totale: 1899
+|  KMeansCustom
+|  2
+|  MAR
+|  0.46028522598151334
+|  1
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 30-39
-|  Area: CAM
-|  Totale: 3225
+|  KMeansCustom
+|  2
+|  MOL
+|  0.4943702010136673
+|  1
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 30-39
-|  Area: LOM
-|  Totale: 3075
+|  KMeansCustom
+|  2
+|  UMB
+|  0.4512498656089562
+|  1
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 30-39
-|  Area: SIC
-|  Totale: 1562
+|  KMeansCustom
+|  2
+|  PAB
+|  0.44528634196153377
+|  1
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 30-39
-|  Area: PIE
-|  Totale: 1054
+|  KMeansCustom
+|  2
+|  LIG
+|  0.5040670815105261
+|  1
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 30-39
-|  Area: TOS
-|  Totale: 914
+|  KMeansCustom
+|  2
+|  PAT
+|  0.4254889902614985
+|  0
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 20-29
-|  Area: CAM
-|  Totale: 2865
+|  KMeansCustom
+|  2
+|  ABR
+|  0.454217681146791
+|  1
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 20-29
-|  Area: LOM
-|  Totale: 2551
+|  KMeansCustom
+|  2
+|  SAR
+|  0.3994349982011294
+|  0
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 20-29
-|  Area: SIC
-|  Totale: 1270
+|  KMeansCustom
+|  2
+|  BAS
+|  0.4435798304902124
+|  1
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 20-29
-|  Area: PIE
-|  Totale: 679
+|  KMeansCustom
+|  2
+|  LAZ
+|  0.43464196241222375
+|  1
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 20-29
-|  Area: TOS
-|  Totale: 526
+|  KMeansCustom
+|  2
+|  LOM
+|  0.45159974042318884
+|  1
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 16-19
-|  Area: LOM
-|  Totale: 456
+|  KMeansCustom
+|  2
+|  EMR
+|  0.46124966792627864
+|  1
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:02 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 16-19
-|  Area: CAM
-|  Totale: 369
+|  KMeansCustom
+|  2
+|  PUG
+|  0.44725435715575346
+|  1
+|  0.006801584334425949
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 16-19
-|  Area: SIC
-|  Totale: 228
+|  KMeansCustom
+|  3
+|  FVG
+|  0.4425807484944772
+|  1
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 16-19
-|  Area: PIE
-|  Totale: 105
+|  KMeansCustom
+|  3
+|  PIE
+|  0.45440172610285945
+|  1
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-06-01
-|  Fascia: 16-19
-|  Area: CAL
-|  Totale: 67
+|  KMeansCustom
+|  3
+|  VDA
+|  0.4568788086686307
+|  1
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 90+
-|  Area: VEN
-|  Totale: 1415
+|  KMeansCustom
+|  3
+|  TOS
+|  0.4349793216700883
+|  1
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 90+
-|  Area: LOM
-|  Totale: 1261
+|  KMeansCustom
+|  3
+|  VEN
+|  0.45234750341734375
+|  1
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 90+
-|  Area: LAZ
-|  Totale: 961
+|  KMeansCustom
+|  3
+|  CAL
+|  0.38851739975118865
+|  0
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 90+
-|  Area: SIC
-|  Totale: 679
+|  KMeansCustom
+|  3
+|  CAM
+|  0.4087124119174775
+|  0
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 90+
-|  Area: PUG
-|  Totale: 651
+|  KMeansCustom
+|  3
+|  SIC
+|  0.37480695642689466
+|  0
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 80-89
-|  Area: LOM
-|  Totale: 7172
+|  KMeansCustom
+|  3
+|  MAR
+|  0.46028522598151334
+|  1
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 80-89
-|  Area: TOS
-|  Totale: 5469
+|  KMeansCustom
+|  3
+|  MOL
+|  0.4943702010136673
+|  2
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 80-89
-|  Area: VEN
-|  Totale: 3362
+|  KMeansCustom
+|  3
+|  UMB
+|  0.4512498656089562
+|  1
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 80-89
-|  Area: LAZ
-|  Totale: 3316
+|  KMeansCustom
+|  3
+|  PAB
+|  0.44528634196153377
+|  1
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 80-89
-|  Area: EMR
-|  Totale: 3205
+|  KMeansCustom
+|  3
+|  LIG
+|  0.5040670815105261
+|  2
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 70-79
-|  Area: LOM
-|  Totale: 22563
+|  KMeansCustom
+|  3
+|  PAT
+|  0.4254889902614985
+|  1
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 70-79
-|  Area: PUG
-|  Totale: 8278
+|  KMeansCustom
+|  3
+|  ABR
+|  0.454217681146791
+|  1
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 70-79
-|  Area: EMR
-|  Totale: 7031
+|  KMeansCustom
+|  3
+|  SAR
+|  0.3994349982011294
+|  0
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 70-79
-|  Area: LAZ
-|  Totale: 6953
+|  KMeansCustom
+|  3
+|  BAS
+|  0.4435798304902124
+|  1
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 70-79
-|  Area: VEN
-|  Totale: 6503
+|  KMeansCustom
+|  3
+|  LAZ
+|  0.43464196241222375
+|  1
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 60-69
-|  Area: LOM
-|  Totale: 12912
+|  KMeansCustom
+|  3
+|  LOM
+|  0.45159974042318884
+|  1
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 60-69
-|  Area: CAM
-|  Totale: 7136
+|  KMeansCustom
+|  3
+|  EMR
+|  0.46124966792627864
+|  1
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:04 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 60-69
-|  Area: LAZ
-|  Totale: 5430
+|  KMeansCustom
+|  3
+|  PUG
+|  0.44725435715575346
+|  1
+|  0.0021241929336219814
+|  0.0021241929336219814
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 60-69
-|  Area: SIC
-|  Totale: 4821
+|  KMeansCustom
+|  4
+|  FVG
+|  0.4425807484944772
+|  3
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 60-69
-|  Area: VEN
-|  Totale: 4542
+|  KMeansCustom
+|  4
+|  PIE
+|  0.45440172610285945
+|  3
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 50-59
-|  Area: LOM
-|  Totale: 3166
+|  KMeansCustom
+|  4
+|  VDA
+|  0.4568788086686307
+|  3
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 50-59
-|  Area: CAM
-|  Totale: 2400
+|  KMeansCustom
+|  4
+|  TOS
+|  0.4349793216700883
+|  3
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 50-59
-|  Area: SIC
-|  Totale: 1691
+|  KMeansCustom
+|  4
+|  VEN
+|  0.45234750341734375
+|  3
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 50-59
-|  Area: PIE
-|  Totale: 1540
+|  KMeansCustom
+|  4
+|  CAL
+|  0.38851739975118865
+|  1
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 50-59
-|  Area: EMR
-|  Totale: 1447
+|  KMeansCustom
+|  4
+|  CAM
+|  0.4087124119174775
+|  2
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 40-49
-|  Area: LOM
-|  Totale: 1517
+|  KMeansCustom
+|  4
+|  SIC
+|  0.37480695642689466
+|  1
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 40-49
-|  Area: CAM
-|  Totale: 1209
+|  KMeansCustom
+|  4
+|  MAR
+|  0.46028522598151334
+|  3
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 40-49
-|  Area: SIC
-|  Totale: 918
+|  KMeansCustom
+|  4
+|  MOL
+|  0.4943702010136673
+|  0
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 40-49
-|  Area: EMR
-|  Totale: 899
+|  KMeansCustom
+|  4
+|  UMB
+|  0.4512498656089562
+|  3
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 40-49
-|  Area: PIE
-|  Totale: 862
+|  KMeansCustom
+|  4
+|  PAB
+|  0.44528634196153377
+|  3
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 30-39
-|  Area: LOM
-|  Totale: 857
+|  KMeansCustom
+|  4
+|  LIG
+|  0.5040670815105261
+|  0
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 30-39
-|  Area: CAM
-|  Totale: 705
+|  KMeansCustom
+|  4
+|  PAT
+|  0.4254889902614985
+|  2
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 30-39
-|  Area: SIC
-|  Totale: 528
+|  KMeansCustom
+|  4
+|  ABR
+|  0.454217681146791
+|  3
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 30-39
-|  Area: LAZ
-|  Totale: 484
+|  KMeansCustom
+|  4
+|  SAR
+|  0.3994349982011294
+|  2
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 30-39
-|  Area: EMR
-|  Totale: 451
+|  KMeansCustom
+|  4
+|  BAS
+|  0.4435798304902124
+|  3
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 20-29
-|  Area: LOM
-|  Totale: 762
+|  KMeansCustom
+|  4
+|  LAZ
+|  0.43464196241222375
+|  3
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 20-29
-|  Area: CAM
-|  Totale: 519
+|  KMeansCustom
+|  4
+|  LOM
+|  0.45159974042318884
+|  3
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 20-29
-|  Area: LAZ
-|  Totale: 512
+|  KMeansCustom
+|  4
+|  EMR
+|  0.46124966792627864
+|  3
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:05 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 20-29
-|  Area: SIC
-|  Totale: 443
+|  KMeansCustom
+|  4
+|  PUG
+|  0.44725435715575346
+|  3
+|  0.0013973721765497193
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 20-29
-|  Area: PIE
-|  Totale: 352
+|  KMeansCustom
+|  5
+|  FVG
+|  0.4425807484944772
+|  0
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 16-19
-|  Area: LOM
-|  Totale: 158
+|  KMeansCustom
+|  5
+|  PIE
+|  0.45440172610285945
+|  4
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 16-19
-|  Area: CAM
-|  Totale: 86
+|  KMeansCustom
+|  5
+|  VDA
+|  0.4568788086686307
+|  4
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 16-19
-|  Area: PIE
-|  Totale: 64
+|  KMeansCustom
+|  5
+|  TOS
+|  0.4349793216700883
+|  0
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 16-19
-|  Area: EMR
-|  Totale: 58
+|  KMeansCustom
+|  5
+|  VEN
+|  0.45234750341734375
+|  4
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-05-01
-|  Fascia: 16-19
-|  Area: SIC
-|  Totale: 58
+|  KMeansCustom
+|  5
+|  CAL
+|  0.38851739975118865
+|  3
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 90+
-|  Area: LOM
-|  Totale: 2547
+|  KMeansCustom
+|  5
+|  CAM
+|  0.4087124119174775
+|  3
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 90+
-|  Area: VEN
-|  Totale: 1742
+|  KMeansCustom
+|  5
+|  SIC
+|  0.37480695642689466
+|  1
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 90+
-|  Area: TOS
-|  Totale: 1526
+|  KMeansCustom
+|  5
+|  MAR
+|  0.46028522598151334
+|  4
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 90+
-|  Area: EMR
-|  Totale: 1387
+|  KMeansCustom
+|  5
+|  MOL
+|  0.4943702010136673
+|  2
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 90+
-|  Area: LAZ
-|  Totale: 1129
+|  KMeansCustom
+|  5
+|  UMB
+|  0.4512498656089562
+|  4
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 80-89
-|  Area: LOM
-|  Totale: 11222
+|  KMeansCustom
+|  5
+|  PAB
+|  0.44528634196153377
+|  0
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 80-89
-|  Area: VEN
-|  Totale: 7128
+|  KMeansCustom
+|  5
+|  LIG
+|  0.5040670815105261
+|  2
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 80-89
-|  Area: PIE
-|  Totale: 5464
+|  KMeansCustom
+|  5
+|  PAT
+|  0.4254889902614985
+|  0
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 80-89
-|  Area: EMR
-|  Totale: 5158
+|  KMeansCustom
+|  5
+|  ABR
+|  0.454217681146791
+|  4
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 80-89
-|  Area: LAZ
-|  Totale: 4958
+|  KMeansCustom
+|  5
+|  SAR
+|  0.3994349982011294
+|  3
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 70-79
-|  Area: VEN
-|  Totale: 4252
+|  KMeansCustom
+|  5
+|  BAS
+|  0.4435798304902124
+|  0
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 70-79
-|  Area: LAZ
-|  Totale: 3895
+|  KMeansCustom
+|  5
+|  LAZ
+|  0.43464196241222375
+|  0
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 70-79
-|  Area: EMR
-|  Totale: 3227
+|  KMeansCustom
+|  5
+|  LOM
+|  0.45159974042318884
+|  4
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 70-79
-|  Area: SIC
-|  Totale: 2948
+|  KMeansCustom
+|  5
+|  EMR
+|  0.46124966792627864
+|  4
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:06 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 70-79
-|  Area: CAM
-|  Totale: 2890
+|  KMeansCustom
+|  5
+|  PUG
+|  0.44725435715575346
+|  4
+|  6.939380919945316E-4
+|  6.939380919945316E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 60-69
-|  Area: LAZ
-|  Totale: 1543
+|  BisectingKMeansCustom
+|  2
+|  FVG
+|  0.4425807484944772
+|  1
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 60-69
-|  Area: LOM
-|  Totale: 1470
+|  BisectingKMeansCustom
+|  2
+|  PIE
+|  0.45440172610285945
+|  1
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 60-69
-|  Area: VEN
-|  Totale: 1135
+|  BisectingKMeansCustom
+|  2
+|  VDA
+|  0.4568788086686307
+|  1
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 60-69
-|  Area: SIC
-|  Totale: 968
+|  BisectingKMeansCustom
+|  2
+|  TOS
+|  0.4349793216700883
+|  1
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 60-69
-|  Area: CAM
-|  Totale: 931
+|  BisectingKMeansCustom
+|  2
+|  VEN
+|  0.45234750341734375
+|  1
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 50-59
-|  Area: LOM
-|  Totale: 3059
+|  BisectingKMeansCustom
+|  2
+|  CAL
+|  0.38851739975118865
+|  0
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 50-59
-|  Area: VEN
-|  Totale: 1155
+|  BisectingKMeansCustom
+|  2
+|  CAM
+|  0.4087124119174775
+|  0
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 50-59
-|  Area: LAZ
-|  Totale: 860
+|  BisectingKMeansCustom
+|  2
+|  SIC
+|  0.37480695642689466
+|  0
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 50-59
-|  Area: LIG
-|  Totale: 641
+|  BisectingKMeansCustom
+|  2
+|  MAR
+|  0.46028522598151334
+|  1
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 50-59
-|  Area: SAR
-|  Totale: 635
+|  BisectingKMeansCustom
+|  2
+|  MOL
+|  0.4943702010136673
+|  1
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 40-49
-|  Area: LOM
-|  Totale: 2619
+|  BisectingKMeansCustom
+|  2
+|  UMB
+|  0.4512498656089562
+|  1
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 40-49
-|  Area: VEN
-|  Totale: 782
+|  BisectingKMeansCustom
+|  2
+|  PAB
+|  0.44528634196153377
+|  1
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 40-49
-|  Area: LAZ
-|  Totale: 616
+|  BisectingKMeansCustom
+|  2
+|  LIG
+|  0.5040670815105261
+|  1
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 40-49
-|  Area: SAR
-|  Totale: 487
+|  BisectingKMeansCustom
+|  2
+|  PAT
+|  0.4254889902614985
+|  0
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 40-49
-|  Area: PIE
-|  Totale: 405
+|  BisectingKMeansCustom
+|  2
+|  ABR
+|  0.454217681146791
+|  1
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 30-39
-|  Area: LOM
-|  Totale: 1905
+|  BisectingKMeansCustom
+|  2
+|  SAR
+|  0.3994349982011294
+|  0
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 30-39
-|  Area: VEN
-|  Totale: 551
+|  BisectingKMeansCustom
+|  2
+|  BAS
+|  0.4435798304902124
+|  1
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 30-39
-|  Area: LAZ
-|  Totale: 538
+|  BisectingKMeansCustom
+|  2
+|  LAZ
+|  0.43464196241222375
+|  1
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 30-39
-|  Area: PIE
-|  Totale: 344
+|  BisectingKMeansCustom
+|  2
+|  LOM
+|  0.45159974042318884
+|  1
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 30-39
-|  Area: CAM
-|  Totale: 324
+|  BisectingKMeansCustom
+|  2
+|  EMR
+|  0.46124966792627864
+|  1
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:08 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 20-29
-|  Area: LOM
-|  Totale: 1233
+|  BisectingKMeansCustom
+|  2
+|  PUG
+|  0.44725435715575346
+|  1
+|  0.006801584334425126
+|  0.006801584334425949
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 20-29
-|  Area: VEN
-|  Totale: 519
+|  BisectingKMeansCustom
+|  3
+|  FVG
+|  0.4425807484944772
+|  1
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 20-29
-|  Area: LAZ
-|  Totale: 292
+|  BisectingKMeansCustom
+|  3
+|  PIE
+|  0.45440172610285945
+|  1
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 20-29
-|  Area: CAM
-|  Totale: 278
+|  BisectingKMeansCustom
+|  3
+|  VDA
+|  0.4568788086686307
+|  1
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 20-29
-|  Area: PIE
-|  Totale: 255
+|  BisectingKMeansCustom
+|  3
+|  TOS
+|  0.4349793216700883
+|  1
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 16-19
-|  Area: LOM
-|  Totale: 30
+|  BisectingKMeansCustom
+|  3
+|  VEN
+|  0.45234750341734375
+|  1
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 16-19
-|  Area: SIC
-|  Totale: 25
+|  BisectingKMeansCustom
+|  3
+|  CAL
+|  0.38851739975118865
+|  0
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 16-19
-|  Area: CAM
-|  Totale: 23
+|  BisectingKMeansCustom
+|  3
+|  CAM
+|  0.4087124119174775
+|  0
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 16-19
-|  Area: VEN
-|  Totale: 21
+|  BisectingKMeansCustom
+|  3
+|  SIC
+|  0.37480695642689466
+|  0
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-04-01
-|  Fascia: 16-19
-|  Area: LAZ
-|  Totale: 20
+|  BisectingKMeansCustom
+|  3
+|  MAR
+|  0.46028522598151334
+|  1
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 90+
-|  Area: EMR
-|  Totale: 1389
+|  BisectingKMeansCustom
+|  3
+|  MOL
+|  0.4943702010136673
+|  2
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 90+
-|  Area: LOM
-|  Totale: 1078
+|  BisectingKMeansCustom
+|  3
+|  UMB
+|  0.4512498656089562
+|  1
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 90+
-|  Area: LAZ
-|  Totale: 706
+|  BisectingKMeansCustom
+|  3
+|  PAB
+|  0.44528634196153377
+|  1
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 90+
-|  Area: TOS
-|  Totale: 601
+|  BisectingKMeansCustom
+|  3
+|  LIG
+|  0.5040670815105261
+|  2
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 90+
-|  Area: PIE
-|  Totale: 593
+|  BisectingKMeansCustom
+|  3
+|  PAT
+|  0.4254889902614985
+|  0
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 80-89
-|  Area: LAZ
-|  Totale: 3193
+|  BisectingKMeansCustom
+|  3
+|  ABR
+|  0.454217681146791
+|  1
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 80-89
-|  Area: LOM
-|  Totale: 2988
+|  BisectingKMeansCustom
+|  3
+|  SAR
+|  0.3994349982011294
+|  0
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 80-89
-|  Area: EMR
-|  Totale: 2928
+|  BisectingKMeansCustom
+|  3
+|  BAS
+|  0.4435798304902124
+|  1
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 80-89
-|  Area: CAM
-|  Totale: 2617
+|  BisectingKMeansCustom
+|  3
+|  LAZ
+|  0.43464196241222375
+|  1
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 80-89
-|  Area: VEN
-|  Totale: 2425
+|  BisectingKMeansCustom
+|  3
+|  LOM
+|  0.45159974042318884
+|  1
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 70-79
-|  Area: LOM
-|  Totale: 134
+|  BisectingKMeansCustom
+|  3
+|  EMR
+|  0.46124966792627864
+|  1
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:09 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 70-79
-|  Area: LAZ
-|  Totale: 91
+|  BisectingKMeansCustom
+|  3
+|  PUG
+|  0.44725435715575346
+|  1
+|  0.002445212011463971
+|  0.002445212011462966
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 70-79
-|  Area: SAR
-|  Totale: 54
+|  BisectingKMeansCustom
+|  4
+|  FVG
+|  0.4425807484944772
+|  2
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 70-79
-|  Area: TOS
-|  Totale: 54
+|  BisectingKMeansCustom
+|  4
+|  PIE
+|  0.45440172610285945
+|  2
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 70-79
-|  Area: SIC
-|  Totale: 49
+|  BisectingKMeansCustom
+|  4
+|  VDA
+|  0.4568788086686307
+|  2
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 60-69
-|  Area: CAM
-|  Totale: 961
+|  BisectingKMeansCustom
+|  4
+|  TOS
+|  0.4349793216700883
+|  2
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 60-69
-|  Area: PUG
-|  Totale: 440
+|  BisectingKMeansCustom
+|  4
+|  VEN
+|  0.45234750341734375
+|  2
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 60-69
-|  Area: LAZ
-|  Totale: 287
+|  BisectingKMeansCustom
+|  4
+|  CAL
+|  0.38851739975118865
+|  0
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 60-69
-|  Area: TOS
-|  Totale: 237
+|  BisectingKMeansCustom
+|  4
+|  CAM
+|  0.4087124119174775
+|  1
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 60-69
-|  Area: VEN
-|  Totale: 164
+|  BisectingKMeansCustom
+|  4
+|  SIC
+|  0.37480695642689466
+|  0
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 50-59
-|  Area: CAM
-|  Totale: 1867
+|  BisectingKMeansCustom
+|  4
+|  MAR
+|  0.46028522598151334
+|  2
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 50-59
-|  Area: LAZ
-|  Totale: 1160
+|  BisectingKMeansCustom
+|  4
+|  MOL
+|  0.4943702010136673
+|  3
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 50-59
-|  Area: TOS
-|  Totale: 1069
+|  BisectingKMeansCustom
+|  4
+|  UMB
+|  0.4512498656089562
+|  2
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 50-59
-|  Area: PUG
-|  Totale: 972
+|  BisectingKMeansCustom
+|  4
+|  PAB
+|  0.44528634196153377
+|  2
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 50-59
-|  Area: SIC
-|  Totale: 622
+|  BisectingKMeansCustom
+|  4
+|  LIG
+|  0.5040670815105261
+|  3
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 40-49
-|  Area: TOS
-|  Totale: 1424
+|  BisectingKMeansCustom
+|  4
+|  PAT
+|  0.4254889902614985
+|  1
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 40-49
-|  Area: CAM
-|  Totale: 1151
+|  BisectingKMeansCustom
+|  4
+|  ABR
+|  0.454217681146791
+|  2
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 40-49
-|  Area: PUG
-|  Totale: 918
+|  BisectingKMeansCustom
+|  4
+|  SAR
+|  0.3994349982011294
+|  1
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 40-49
-|  Area: LAZ
-|  Totale: 881
+|  BisectingKMeansCustom
+|  4
+|  BAS
+|  0.4435798304902124
+|  2
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 40-49
-|  Area: SIC
-|  Totale: 679
+|  BisectingKMeansCustom
+|  4
+|  LAZ
+|  0.43464196241222375
+|  2
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 30-39
-|  Area: TOS
-|  Totale: 911
+|  BisectingKMeansCustom
+|  4
+|  LOM
+|  0.45159974042318884
+|  2
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 30-39
-|  Area: CAM
-|  Totale: 565
+|  BisectingKMeansCustom
+|  4
+|  EMR
+|  0.46124966792627864
+|  2
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:10 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 30-39
-|  Area: PUG
-|  Totale: 545
+|  BisectingKMeansCustom
+|  4
+|  PUG
+|  0.44725435715575346
+|  2
+|  0.0013973721765508373
+|  0.0013973721765497193
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 30-39
-|  Area: PIE
-|  Totale: 394
+|  BisectingKMeansCustom
+|  5
+|  FVG
+|  0.4425807484944772
+|  2
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 30-39
-|  Area: LOM
-|  Totale: 388
+|  BisectingKMeansCustom
+|  5
+|  PIE
+|  0.45440172610285945
+|  3
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 20-29
-|  Area: TOS
-|  Totale: 445
+|  BisectingKMeansCustom
+|  5
+|  VDA
+|  0.4568788086686307
+|  3
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 20-29
-|  Area: PUG
-|  Totale: 363
+|  BisectingKMeansCustom
+|  5
+|  TOS
+|  0.4349793216700883
+|  2
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 20-29
-|  Area: VEN
-|  Totale: 334
+|  BisectingKMeansCustom
+|  5
+|  VEN
+|  0.45234750341734375
+|  3
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 20-29
-|  Area: PIE
-|  Totale: 284
+|  BisectingKMeansCustom
+|  5
+|  CAL
+|  0.38851739975118865
+|  0
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 20-29
-|  Area: LOM
-|  Totale: 271
+|  BisectingKMeansCustom
+|  5
+|  CAM
+|  0.4087124119174775
+|  1
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 16-19
-|  Area: LAZ
-|  Totale: 7
+|  BisectingKMeansCustom
+|  5
+|  SIC
+|  0.37480695642689466
+|  0
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 16-19
-|  Area: VEN
-|  Totale: 6
+|  BisectingKMeansCustom
+|  5
+|  MAR
+|  0.46028522598151334
+|  3
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 16-19
-|  Area: SIC
-|  Totale: 6
+|  BisectingKMeansCustom
+|  5
+|  MOL
+|  0.4943702010136673
+|  4
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 16-19
-|  Area: TOS
-|  Totale: 6
+|  BisectingKMeansCustom
+|  5
+|  UMB
+|  0.4512498656089562
+|  3
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-03-01
-|  Fascia: 16-19
-|  Area: PUG
-|  Totale: 6
+|  BisectingKMeansCustom
+|  5
+|  PAB
+|  0.44528634196153377
+|  2
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 90+
-|  Area: LOM
-|  Totale: 316
+|  BisectingKMeansCustom
+|  5
+|  LIG
+|  0.5040670815105261
+|  4
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 90+
-|  Area: PIE
-|  Totale: 294
+|  BisectingKMeansCustom
+|  5
+|  PAT
+|  0.4254889902614985
+|  1
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 90+
-|  Area: EMR
-|  Totale: 272
+|  BisectingKMeansCustom
+|  5
+|  ABR
+|  0.454217681146791
+|  3
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 90+
-|  Area: VEN
-|  Totale: 207
+|  BisectingKMeansCustom
+|  5
+|  SAR
+|  0.3994349982011294
+|  1
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 90+
-|  Area: TOS
-|  Totale: 168
+|  BisectingKMeansCustom
+|  5
+|  BAS
+|  0.4435798304902124
+|  2
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 80-89
-|  Area: LOM
-|  Totale: 304
+|  BisectingKMeansCustom
+|  5
+|  LAZ
+|  0.43464196241222375
+|  2
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 80-89
-|  Area: PIE
-|  Totale: 284
+|  BisectingKMeansCustom
+|  5
+|  LOM
+|  0.45159974042318884
+|  3
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 80-89
-|  Area: LAZ
-|  Totale: 257
+|  BisectingKMeansCustom
+|  5
+|  EMR
+|  0.46124966792627864
+|  3
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
+mag 26, 2021 3:25:12 PM utility.LogController queryOutput
 INFORMAZIONI: 
 +-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 80-89
-|  Area: PAB
-|  Totale: 245
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 80-89
-|  Area: EMR
-|  Totale: 244
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 70-79
-|  Area: LOM
-|  Totale: 130
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 70-79
-|  Area: PIE
-|  Totale: 122
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 70-79
-|  Area: EMR
-|  Totale: 96
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 70-79
-|  Area: LAZ
-|  Totale: 94
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 70-79
-|  Area: VEN
-|  Totale: 80
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 60-69
-|  Area: LOM
-|  Totale: 726
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 60-69
-|  Area: LAZ
-|  Totale: 521
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 60-69
-|  Area: CAM
-|  Totale: 492
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 60-69
-|  Area: EMR
-|  Totale: 471
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 60-69
-|  Area: SIC
-|  Totale: 468
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 50-59
-|  Area: LOM
-|  Totale: 2008
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 50-59
-|  Area: EMR
-|  Totale: 1111
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 50-59
-|  Area: VEN
-|  Totale: 1097
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 50-59
-|  Area: PIE
-|  Totale: 1068
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 50-59
-|  Area: LAZ
-|  Totale: 944
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 40-49
-|  Area: LOM
-|  Totale: 1433
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 40-49
-|  Area: EMR
-|  Totale: 869
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 40-49
-|  Area: LAZ
-|  Totale: 781
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 40-49
-|  Area: VEN
-|  Totale: 745
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 40-49
-|  Area: PIE
-|  Totale: 738
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 30-39
-|  Area: LOM
-|  Totale: 1000
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 30-39
-|  Area: EMR
-|  Totale: 649
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 30-39
-|  Area: LAZ
-|  Totale: 616
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 30-39
-|  Area: CAM
-|  Totale: 583
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 30-39
-|  Area: PIE
-|  Totale: 510
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 20-29
-|  Area: LOM
-|  Totale: 717
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 20-29
-|  Area: EMR
-|  Totale: 472
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 20-29
-|  Area: LAZ
-|  Totale: 442
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 20-29
-|  Area: PIE
-|  Totale: 389
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 20-29
-|  Area: TOS
-|  Totale: 383
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 16-19
-|  Area: LAZ
-|  Totale: 8
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 16-19
-|  Area: EMR
-|  Totale: 5
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 16-19
-|  Area: LOM
-|  Totale: 5
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 16-19
-|  Area: VEN
-|  Totale: 3
-+-----------------------------------+
-
-
-mag 26, 2021 3:18:40 PM utility.LogController queryOutput
-INFORMAZIONI: 
-+-----------------------------------+
-|  Giorno: 2021-02-01
-|  Fascia: 16-19
-|  Area: SIC
-|  Totale: 3
+|  BisectingKMeansCustom
+|  5
+|  PUG
+|  0.44725435715575346
+|  2
+|  7.357303147579874E-4
+|  7.357303147576587E-4
 +-----------------------------------+
 
 
