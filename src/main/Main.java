@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.Double;
 import java.lang.Float;
 import java.lang.Long;
+import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -12,17 +13,13 @@ import entity.SommDonne;
 
 import logic.ProcessingQ3;
 import logic.TupleComparator;
-import logic.kmeans.BisectingKMeansCustom;
-import logic.kmeans.KMeansCustom;
-import logic.kmeans.KMeansInterface;
+import logic.kmeans.KMeansAbstract;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 
-import org.apache.spark.mllib.clustering.BisectingKMeans;
-import org.apache.spark.mllib.clustering.KMeans;
 import org.apache.spark.mllib.linalg.Vectors;
 import org.apache.spark.mllib.linalg.Vector;
 import org.apache.spark.sql.*;
@@ -223,20 +220,10 @@ public class Main {
 
 	private static void query3() throws IOException {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String[] kMeansAlgo = {"KMeans", "BisectingKMeans"};
+		String[] kMeansAlgo = {"KMeansCustom", "BisectingKMeansCustom"};
+		final String pathPackage = KMeansAbstract.class.getPackage().getName();
 
-		/*
-		List<StructField> listfields = new ArrayList<>();
-		listfields.add(DataTypes.createStructField("algoritmo", DataTypes.StringType, false));
-		listfields.add(DataTypes.createStructField("valoreCluster", DataTypes.IntegerType, false));
-		listfields.add(DataTypes.createStructField("area", DataTypes.StringType, false));
-		listfields.add(DataTypes.createStructField("percentualeVaccinazioni", DataTypes.DoubleType, false));
-		listfields.add(DataTypes.createStructField("predCluster", DataTypes.IntegerType, false));
-		listfields.add(DataTypes.createStructField("trainCost", DataTypes.DoubleType, false));
-		listfields.add(DataTypes.createStructField("wssse", DataTypes.DoubleType, false));
 
-		StructType resultStruct = DataTypes.createStructType(listfields);
-*/
 		SparkConf conf = new SparkConf().setAppName("Query3");
 		try (JavaSparkContext sc = new JavaSparkContext(conf)) {
 			SparkSession spark = SparkSession
@@ -244,24 +231,17 @@ public class Main {
 					.appName("Java Spark SQL Query3")
 					.getOrCreate();
 
-			// non serve filtro su data
-			// prendo dati dal 27 dicembre
-			// forse serve dire qualcosa sul 1 giugno - valore da predire
 
-			List<StructField> resultfields = new ArrayList<>();
-			resultfields.add(DataTypes.createStructField("region", DataTypes.StringType, false));
-			resultfields.add(DataTypes.createStructField("cluster", DataTypes.IntegerType, false));
-			StructType resultStruct = DataTypes.createStructType(resultfields);
 			/*
 			 * prendere coppie (area, popolazione) da totale-popolazione
 			 */
 			Dataset<Row> dfPopolazione = ProcessingQ3.parseCsvTotalePopolazione(spark);
 			JavaRDD<Row> totPopolazioneRdd = dfPopolazione.toJavaRDD();
 			JavaPairRDD<String, Long> totalePopolazione = totPopolazioneRdd.mapToPair(
-					row -> new Tuple2<>(row.getString(0), Long.valueOf(row.getLong(1))));
+					row -> new Tuple2<>(row.getString(0), Long.valueOf(row.getString(1))));
 
 
-			Dataset<Row> dfSomministrazioni = ProcessingQ1.parseCsvSomministrazioni(spark);
+			Dataset<Row> dfSomministrazioni = ProcessingQ3.parseCsvSomministrazioni(spark);
 			Dataset<Somministrazione> dfSomm = dfSomministrazioni.as(Encoders.bean(Somministrazione.class));
 			JavaRDD<Somministrazione> sommRdd = dfSomm.toJavaRDD();
 
@@ -269,90 +249,89 @@ public class Main {
 			// e devo filtrare per isBefore giugno 2021
 			// giugno2021 lo faccio in processingQ3
 			JavaPairRDD<String, Tuple2<Date, Long>> areaDateSomm = sommRdd.mapToPair(somm -> new Tuple2<>(somm.getArea(),
-					new Tuple2<>(simpleDateFormat.parse(somm.getData()), Long.valueOf(somm.getTotale())))).filter(row -> row._2._1.before(ProcessingQ3.getFilterDate())).mapToPair(null);
-			// prendo la somma delle vaccinazioni per regione
-			//JavaPairRDD<String, Long> areaSomm = areaDateSomm.reduceByKey((tuple1, tuple2) ->
-			//		tuple1._2 + tuple2._2).mapToPair(row -> new Tuple2<>(row._1, row._2._2));
+					new Tuple2<>(simpleDateFormat.parse(somm.getData()), Long.valueOf(somm.getTotale())) ) )
+					.filter(row -> row._2._1.before(ProcessingQ3.getFilterDate()));
+
+
 
 			// prendo (regione, regressione lineare)
 			// faccio regressione per stimare vaccinazioni giornaliere per giugno
 			JavaPairRDD<String, SimpleRegression> areaRegression = areaDateSomm.mapToPair(row -> {
 				SimpleRegression simpleRegression = new SimpleRegression();
-				LogController.getSingletonInstance().saveMess(String.format("%f", (double) (row._2._1.getTime() / 1000)));
-				simpleRegression.addData((double) (row._2._1.getTime() / 1000), row._2._2);
+				simpleRegression.addData((double) (row._2._1.getTime()/1000), row._2._2);
 				return new Tuple2<>(row._1, simpleRegression);
 			}).reduceByKey((a, b) -> {
 				a.append(b);
 				return a;
 			});
 
+
 			JavaPairRDD<String, Long> regionVaccinationsPred = areaRegression.mapToPair(
 					row -> {
 						long epochToPredict = ProcessingQ3.getFilterDate().getTime();
-						return new Tuple2<>(row._1, (long) row._2.predict((double) epochToPredict));
+						return new Tuple2<>(row._1, (long) row._2.predict((double) epochToPredict/1000));
 					}).union(areaDateSomm.mapToPair(row -> new Tuple2<>(row._1, row._2._2)));
+
+
 
 			JavaPairRDD<String, Long> sommaVaccinazioni = regionVaccinationsPred.reduceByKey((tuple1, tuple2) -> tuple1 + tuple2);
 
 			JavaPairRDD<String, Double> percentualeVaccinati = sommaVaccinazioni
-					.join(totalePopolazione)
-					.mapToPair(row -> new Tuple2<>(row._1, (double) row._2._1 / row._2._2));
+					.join(totalePopolazione).mapToPair(row -> new Tuple2<>(row._1, (double) row._2._1/row._2._2));
+
 
 			JavaPairRDD<String, Vector> areaSommVettore = percentualeVaccinati
 					.mapToPair(row -> new Tuple2<>(row._1, Vectors.dense(row._2)));
 
 			JavaRDD<Vector> dataset = areaSommVettore.map(row -> row._2);
 
+			for ( Tuple2<String, Vector> row : areaSommVettore.collect() ){
+				LogController.getSingletonInstance().queryOutput(
+						row._1,
+						row._2.toString()
+				);
+			}
+
 			// Raggruppare dati in K cluster da 2 a 5 attraverso K-Means
 			// scelgo tra i due algoritmi
 
 			// creo dataset per inserire colonne del resultStruct
-			List<Tuple7<String,Integer,String,Double,Integer,Double,Double>> result = new ArrayList<>();
-			KMeansInterface kMeans = null;
+			List< Tuple2<Tuple4<String,Integer,Double,Double>,JavaRDD<Tuple3<String,Double,Integer>>> > result = new ArrayList<>();
 
 			for (int i = 0; i < kMeansAlgo.length; i++){
+				try {
+					Class<?> algoCustom = Class.forName( pathPackage + "." + kMeansAlgo[i]);
 
-				switch (i){
-					case 0: // uso KMeans
-						LogController.getSingletonInstance().saveMess("Uso KMeans");
-						kMeans = new KMeansCustom();
-						break;
-					case 1: // uso BisectingKMeans
-						LogController.getSingletonInstance().saveMess("Uso Bisecting KMeans");
-						kMeans = new BisectingKMeansCustom();
-						break;
-					default:
-						LogController.getSingletonInstance().saveMess("{***}Uscita con errore (Kmeans null value)");
-						System.exit(1);
-				}
 				for( int k=2; k<=5; k++){
 
-					kMeans.train(dataset, Integer.valueOf(k), 20);
-					LogController.getSingletonInstance().saveMess(String.valueOf(k));
-					// perche kmeans gne piace???
-					KMeansInterface finalKMeans = kMeans;
-					JavaPairRDD<String, Integer> areaCluster = areaSommVettore.mapToPair(row ->
-							new Tuple2<>(row._1, finalKMeans.predict(row._2)));
-					// get trainCost , get wssse
-					JavaPairRDD<String, Tuple2<Tuple3<Integer, Double, Double>, Double>> areaClusterCosti = areaCluster
-							.mapToPair( row -> new Tuple2<>( row._1, new Tuple3<>( row._2, finalKMeans.getCost(), finalKMeans.getWSSSE(dataset) )))
-							.join(percentualeVaccinati);
+						KMeansAbstract kMeans = (KMeansAbstract) algoCustom.getConstructor().newInstance();
+
+						kMeans.train(dataset, Integer.valueOf(k), 20);
+						JavaPairRDD<String, Integer> areaCluster = areaSommVettore.mapToPair(row ->
+								new Tuple2<>(row._1, kMeans.predict(row._2)));
+						// get trainCost , get wssse
+						JavaPairRDD<String, Tuple2<Integer, Double>> areaClusterPerc = areaCluster
+								.join(percentualeVaccinati);
 
 
-					// su ogni riga di result metto i valori degli attributi
+						// su ogni riga di result metto i valori degli attributi
+						Tuple4<String,Integer,Double,Double> algoCaratteristiche = new Tuple4<>( kMeansAlgo[i], k , kMeans.getCost(), kMeans.getWSSSE(dataset));
 
-					int finalI = i;
-					int finalK = k;
-					areaClusterCosti.foreach(row -> result.add(new Tuple7<>(kMeansAlgo[finalI], finalK, row._1, row._2._2, row._2._1._1(), row._2._1._2(), row._2._1._3())) );
-
+						JavaRDD<Tuple3<String,Double,Integer>> risultatoArea = areaClusterPerc
+								.map(row -> new Tuple3<>( row._1, row._2._2, row._2._1));
+						result.add( new Tuple2<>(algoCaratteristiche,risultatoArea) );
+					}
+				}catch(ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e){
+					e.printStackTrace();
 				}
 			}
 
-			for( Tuple7<String,Integer,String,Double,Integer,Double,Double> entry : result ){
-				LogController.getSingletonInstance().queryOutput(
-						entry._1(),entry._2().toString(),entry._3(),entry._4().toString(),entry._5().toString(), entry._6().toString(),entry._7().toString()
-				);
-			}
+			for( Tuple2<Tuple4<String,Integer,Double,Double>,JavaRDD<Tuple3<String,Double,Integer>>> entry : result )
+				for( Tuple3<String,Double,Integer> areaEntry : entry._2.collect())
+					LogController.getSingletonInstance().queryOutput(
+							entry._1._1(),entry._1._2().toString(),areaEntry._1(),areaEntry._2().toString(),areaEntry._3().toString(), entry._1._3().toString(), entry._1._4().toString()
+					);
+
 
 
 		}

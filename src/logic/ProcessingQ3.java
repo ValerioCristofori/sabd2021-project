@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Calendar;
 
@@ -8,6 +9,7 @@ import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.Row;
 
 import main.Main;
+import utility.LogController;
 
 public class ProcessingQ3 {
 
@@ -23,7 +25,21 @@ public class ProcessingQ3 {
 
     }
 
-    public static Date getFilterDate() {
+    public static Dataset<Row> parseCsvSomministrazioni( SparkSession spark ){
+        // creo dataset con le colonne (data, area, totale) del file csv
+        // successivamente ordino le entry per area e data
+        Dataset<Row> df = spark.read()
+                .csv(Main.getFileSomministrazioneVaccini());
+
+        df = df.withColumnRenamed("_c0", "data");
+        df = df.withColumnRenamed("_c1", "area");
+        df = df.withColumnRenamed("_c2", "totale");
+        df = df.select( "data", "area", "totale" );
+        df = df.sort("area", "data");
+        return df;
+    }
+
+    public static Date getFilterDate() throws IOException {
         // boh, necessaria???
         Calendar giugno2021 = Calendar.getInstance();
         giugno2021.set(Calendar.YEAR, 2021);
@@ -33,8 +49,4 @@ public class ProcessingQ3 {
 
     }
 
-    public static Dataset<Row> parseCsvSomministrazioni(SparkSession spark) {
-
-        return null;
-    }
 }

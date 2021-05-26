@@ -5,8 +5,10 @@ import org.apache.spark.mllib.clustering.KMeans;
 import org.apache.spark.mllib.clustering.KMeansModel;
 import org.apache.spark.mllib.linalg.Vector;
 
+import java.io.Serializable;
 
-public class KMeansCustom extends KMeansInterface{
+
+public class KMeansCustom extends KMeansAbstract {
     private KMeansModel kMeansModel;
 
     public KMeansCustom() {

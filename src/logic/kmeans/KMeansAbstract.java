@@ -3,7 +3,10 @@ package logic.kmeans;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.mllib.linalg.Vector;
 
-public abstract class KMeansInterface {
+import java.io.Serializable;
+
+public abstract class KMeansAbstract implements Serializable {
+
     // clusterizzo i dati in k classi usando KMeans
     public abstract void train (JavaRDD<Vector> dataset, Integer k, Integer iterations);
     public abstract Integer predict(Vector denseVector);
