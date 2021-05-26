@@ -5,17 +5,18 @@ import scala.Tuple3;
 
 import java.util.Comparator;
 
-public class TupleComparator<T1, T2, T3> implements Comparator<Tuple3<T1, T2, T3>>, Serializable {
+public class Tuple3Comparator<T1, T2, T3> implements Comparator<Tuple3<T1, T2, T3>>, Serializable {
 
     private final Comparator<T1> comparatorT1;
     private final Comparator<T2> comparatorT2;
     private final Comparator<T3> comparatorT3;
 
-    public TupleComparator(Comparator<T1> comparatorT1, Comparator<T2> comparatorT2, Comparator<T3> comparatorT3) {
+    public Tuple3Comparator(Comparator<T1> comparatorT1, Comparator<T2> comparatorT2, Comparator<T3> comparatorT3) {
         this.comparatorT1 = comparatorT1;
         this.comparatorT2 = comparatorT2;
         this.comparatorT3 = comparatorT3;
     }
+
 
     @Override
     public int compare(Tuple3<T1, T2, T3> o1, Tuple3<T1, T2, T3> o2) {

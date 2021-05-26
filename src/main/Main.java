@@ -9,10 +9,11 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import entity.SommDonne;
 
-import logic.ProcessingQ3;
-import logic.TupleComparator;
+import logic.*;
 import logic.kmeans.KMeansAbstract;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.apache.spark.SparkConf;
@@ -26,8 +27,6 @@ import org.apache.spark.sql.*;
 
 
 import entity.Somministrazione;
-import logic.ProcessingQ1;
-import logic.ProcessingQ2;
 import org.apache.spark.sql.types.DataTypes;
 import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
@@ -47,8 +46,8 @@ public class Main {
 	public static void main(String[] args) throws SecurityException, IOException, AnalysisException {
 		
 		//query1();
-		//query2();
-		query3();
+		query2();
+		//query3();
 	}
 
 
@@ -164,7 +163,7 @@ public class Main {
 
 
 			// nella chiave: mese = mese successivo, valore = valore predetto
-			JavaPairRDD<Tuple3<String,String,Integer>, String > result =
+			JavaPairRDD<Tuple2<String, String>, Iterable<Tuple2<String, Integer>>> risultatoGruppato =
 					trainingData.mapToPair(row ->{
 	                    int monthInt = Integer.parseInt(row._1._1());
 	                    int nextMonthInt = monthInt % 12 + 1;
@@ -175,21 +174,28 @@ public class Main {
 	                    //LogController.getSingletonInstance().saveMess(String.format("Predizione per chiave %s,%s,%s%nValore %f%n",nextMonthString,row._1._2(),row._1._3(),predictedSomm));
 	                    return new Tuple2<>(new Tuple3<>(nextMonthString,row._1._3(),Integer.valueOf( (int) Math.round( predictedSomm ))), row._1._2() );
 	                }).sortByKey(
-	                		new TupleComparator<>( Comparator.<String>naturalOrder(),
+	                		new Tuple3Comparator<>( Comparator.<String>naturalOrder(),
 									               Comparator.<String>naturalOrder(),
 									               Comparator.<Integer>naturalOrder()),
-							false, 1);
+							false, 1).mapToPair(row -> new Tuple2<>( new Tuple2<>( row._1._1(), row._1._2()), new Tuple2<>(
+					row._2,     // area
+					row._1._3())  // totale somministrazioni
+			)).groupByKey();
 
-			List<Tuple2<Tuple2<String, String>, Tuple2<String, Integer>>> classifiedResult = result.mapToPair(row -> new Tuple2<>( new Tuple2<>(
-																																				row._1._1(),
-																																				row._1._2()),
+			JavaPairRDD<Tuple2<String, String>, ArrayList<Tuple2<String, Integer>>> rank = risultatoGruppato
+					.mapToPair( giorno_fascia -> new Tuple2<>(
+							giorno_fascia._1,
+							Lists.newArrayList(Iterables.limit(giorno_fascia._2,5))
+					)).sortByKey(
+							new Tuple2Comparator<>( Comparator.<String>naturalOrder(),
+									Comparator.<String>naturalOrder()),
+							false, 1 );
 
-																																			new Tuple2<>(
-																																				 row._2,     /* area */
-																																					row._1._3())  /* totale somministrazioni */
-																																		 	)).take(5);
 
-			JavaPairRDD<Tuple2<String, String>, Tuple2<String, Integer> > rank = sc.parallelizePairs(classifiedResult);
+
+/*
+
+			JavaPairRDD<Tuple2<String, String>, Tuple2<String, Integer> > rank = sc.parallelizePairs(risultatoClassificato);
 
 
 
@@ -198,19 +204,17 @@ public class Main {
 													row._1._2(),
 													row._2._1,
 													row._2._2)), resultStruct);
-			dfResult.show(100);
-			for( Tuple2<Tuple2<String, String>, Tuple2<String, Integer>> resRow : rank.collect() ) {
-
-				LogController.getSingletonInstance()
+			dfResult.show(100);*/
+			for( Tuple2<Tuple2<String,String>, ArrayList<Tuple2<String,Integer>>> resRow : rank.collect() )
+				for( Tuple2<String,Integer> top5 : resRow._2)
+					LogController.getSingletonInstance()
 						.queryOutput(
-								String.format("Mese: %s", resRow._1._1),
-
+								String.format("Giorno: %s", getNextDayToPredict(resRow._1._1)),
 								String.format("Fascia: %s",resRow._1._2),
-								String.format("Area: %s", resRow._2._1),
-								String.format("Totale: %s",resRow._2._2)
+								String.format("Area: %s", top5._1),
+								String.format("Totale: %s", top5._2.toString())
 
 						);
-			}
 
 
 		}
