@@ -30,3 +30,42 @@ services:
       - SPARK_SSL_ENABLED=no
     depends_on:
       - spark
+
+   hdfs-master:
+    build:
+      context: ./hdfs
+    image: hdfs-img
+    container_name: hdfs-master
+    environment:
+      - HDFS_MODE=master
+      - 'HDFS_WORKERS=hdfs-worker-1,hdfs-worker-2,hdfs-worker-3'
+    depends_on:
+      - hdfs-worker-1
+      - hdfs-worker-2
+      - hdfs-worker-3
+    volumes:
+      - ./data:/data
+    ports:
+      - 54310:54310
+
+   hdfs-worker-1:
+    build:
+      context: ./hdfs
+    image: hdfs-img
+    environment:
+      - HDFS_MODE=worker
+   hdfs-worker-2:
+    build:
+      context: ./hdfs
+    image: hdfs-img
+    environment:
+      - HDFS_MODE=worker
+   hdfs-worker-3:
+    build:
+      context: ./hdfs
+    image: hdfs-img
+    environment:
+      - HDFS_MODE=worker
+
+
+
