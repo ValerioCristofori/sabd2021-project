@@ -1,8 +1,12 @@
 #!/bin/bash
 
-# Script per automatizzare il processo di run del progetto
+# Automatizzare il processo di build del progetto
 mvn clean package
 
+# Script per setup del HDFS per instanziare i dati
+./hdfs.sh
+
+# Setup di Spark
 $SPARK_HOME/sbin/start-master.sh
 
 # Starts a slave instance on each machine specified #   in the conf/slaves file on the master node
