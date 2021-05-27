@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#init env  -> Start Dockerfile
+	#init env  -> Start Dockerfile
 #sudo docker build -t effeerre/hadoop ./docker/hdfs/
 
 #We can now create an isolated network with 3 datanodes and a namenode
