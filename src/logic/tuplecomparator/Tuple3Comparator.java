@@ -1,4 +1,4 @@
-package logic;
+package logic.tuplecomparator;
 
 import scala.Serializable;
 import scala.Tuple3;

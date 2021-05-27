@@ -47,6 +47,7 @@ services:
       - ./data:/data
     ports:
       - 54310:54310
+      - 9870:9870
 
    hdfs-worker-1:
     build:

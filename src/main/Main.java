@@ -13,8 +13,12 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import entity.SommDonne;
 
-import logic.*;
 import logic.kmeans.KMeansAbstract;
+import logic.processing.ProcessingQ1;
+import logic.processing.ProcessingQ2;
+import logic.processing.ProcessingQ3;
+import logic.tuplecomparator.Tuple2Comparator;
+import logic.tuplecomparator.Tuple3Comparator;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
@@ -32,7 +36,9 @@ import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
 import scala.*;
 
+import utility.Hdfs;
 import utility.LogController;
+import utility.TimeHandler;
 
 public class Main {
 
@@ -41,27 +47,45 @@ public class Main {
 	private static String fileSomministrazioneVacciniDonne = "data/somministrazioni-vaccini-latest.csv";
 	private static String fileTotalePopolazione = "data/totale-popolazione.csv";
 
+	private static Hdfs hdfs;
 
 
 	public static void main(String[] args) throws SecurityException, IOException, AnalysisException {
-		
-		//query1();
-		//query2();
-		query3();
+		String hdfsUrl = "hdfs://hdfs-master:54310";
+
+		SparkConf conf = new SparkConf().setAppName("Project SABD");
+		try (JavaSparkContext sc = new JavaSparkContext(conf)) {
+			SparkSession spark = SparkSession
+					.builder()
+					.appName("Java Spark SQL project")
+					.getOrCreate();
+
+			hdfs = Hdfs.createInstance( spark, hdfsUrl);
+
+			long duration1 = query1(spark);
+			long duration2 = query2(spark);
+			long duration3 = query3(spark);
+
+
+			sc.stop();
+		}
+
 	}
 
 
-	private static void query1() throws SecurityException, IOException {
+	private static long query1(SparkSession spark) throws SecurityException, IOException {
 		// Q1: partendo dai file csv, per ogni mese e area, calcolare le somministrazioni medie giornaliere in un centro generico
 		// vengono considerati i dati a partire dal 2021-01-01
-		
-		SparkConf conf = new SparkConf().setAppName("Query1");
-		try (JavaSparkContext sc = new JavaSparkContext(conf)) {
-			SparkSession spark = SparkSession
-				    .builder()
-				    .appName("Java Spark SQL Query1")
-				    .getOrCreate();
 
+			List<StructField> listfields = new ArrayList<>();
+			listfields.add(DataTypes.createStructField("area", DataTypes.StringType, false));
+			listfields.add(DataTypes.createStructField("mese", DataTypes.StringType, false));
+			listfields.add(DataTypes.createStructField("avg", DataTypes.FloatType, false));
+			StructType resultStruct = DataTypes.createStructType(listfields);
+
+
+			TimeHandler timeHandler = new TimeHandler();
+			timeHandler.start();
 			// prendere coppie (area, numero di centri)
 
 			Dataset<Row> dfCentri = ProcessingQ1.parseCsvCentri(spark);
@@ -87,30 +111,30 @@ public class Main {
 				Tuple2<Tuple2<String,String>, Float> avg = new Tuple2<>( tuple._1, Float.valueOf( (float)totale/count) );
 				return avg;
 			});
-			JavaPairRDD<String, Tuple2<String, Float> > res = avgRdd.mapToPair( row -> new Tuple2<>(row._1._1, new Tuple2<>(row._1._2, row._2) ) )
+			JavaPairRDD<String,Tuple2<String,Float>> res = avgRdd.mapToPair( row -> new Tuple2<>(row._1._1, new Tuple2<>(row._1._2, row._2) ) )
 					.join( centriRdd )
 					.mapToPair( tuple -> {
 						Float avg = tuple._2._1._2;
 						Integer numCentri = tuple._2._2;
 						return new Tuple2<>( tuple._1, new Tuple2<>( tuple._2._1._1, Float.valueOf( avg.floatValue()/numCentri.floatValue() ) ) );
 					});
-			
-			
-			for( Tuple2<String, Tuple2<String, Float> > resRow : res.collect() ) {
-				LogController.getSingletonInstance()
-						.queryOutput(
-								String.format("Area: %s", resRow._1),
-								String.format("Mese: %s",resRow._2._1),
-								String.format("Avg: %f", resRow._2._2)
-						);
-			}
-			sc.stop();
-		}
+
+			long duration = timeHandler.getDuration();
+
+			JavaRDD<Row> risultatoPrintare = res.map( row -> RowFactory.create(row) );
+			Dataset<Row> dfResult = spark.createDataFrame( risultatoPrintare, resultStruct);
+
+			hdfs.saveDataset(dfResult, "query1");
+
+			return duration;
+
+
+
 
 	}
 	
 
-	private static void query2() throws IOException {
+	private static long query2(SparkSession spark) throws IOException {
 		// Q2: partendo dal file csv, per le donne e per ogni mese,
 		// fare una classifica delle prime 5 aree per cui si prevede il maggior numero di somministrazioni il primo giorno del mese successivo
 		// si considerano i dati di un mese per predire il mese successivo (partendo da gennaio 2021)
@@ -120,14 +144,13 @@ public class Main {
 
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat simpleMonthFormat = new SimpleDateFormat("MM");
-		
-		SparkConf conf = new SparkConf().setAppName("Query2");
-		try (JavaSparkContext sc = new JavaSparkContext(conf)) {
-			SparkSession spark = SparkSession
-				    .builder()
-				    .appName("Java Spark SQL Query2")
-				    .getOrCreate();
+
+
+
 			Date gennaioData = ProcessingQ2.getFilterDate();
+
+			TimeHandler timeHandler = new TimeHandler();
+			timeHandler.start();
 
 			List<StructField> listfields = new ArrayList<>();
 			listfields.add(DataTypes.createStructField("data", DataTypes.StringType, false));
@@ -154,7 +177,6 @@ public class Main {
 	                        	double val = Integer.valueOf(row._2).doubleValue();
 	                            SimpleRegression simpleRegression = new SimpleRegression();
 	                            simpleRegression.addData((double) epochTime, val);
-	                            //LogController.getSingletonInstance().saveMess( String.format("Chiave %s,%s,%s%nValore %f%n", row._1._2(),row._1._3(),simpleDateFormat.format(row._1._1()),val));
 	                            return new Tuple2<>(new Tuple3<>( month, row._1._2(), row._1._3()), simpleRegression);
 	                        }).reduceByKey( (tuple1, tuple2) -> {
 									tuple1.append(tuple2);
@@ -171,7 +193,6 @@ public class Main {
 	                    String nextDay = getNextDayToPredict(nextMonthInt);
 	                    long epochToPredict = simpleDateFormat.parse(nextDay).getTime();
 	                    double predictedSomm = row._2.predict( (double)epochToPredict );
-	                    //LogController.getSingletonInstance().saveMess(String.format("Predizione per chiave %s,%s,%s%nValore %f%n",nextMonthString,row._1._2(),row._1._3(),predictedSomm));
 	                    return new Tuple2<>(new Tuple3<>(nextMonthString,row._1._3(),Integer.valueOf( (int) Math.round( predictedSomm ))), row._1._2() );
 	                }).sortByKey(
 	                		new Tuple3Comparator<>( Comparator.<String>naturalOrder(),
@@ -191,38 +212,32 @@ public class Main {
 									Comparator.<String>naturalOrder()),
 							false, 1 );
 
+			long duration = timeHandler.getDuration();
+
+			JavaRDD<Row> risultatoPrintare = rank.map( row -> RowFactory.create(row) );
 
 
-			for( Tuple2<Tuple2<String,String>, ArrayList<Tuple2<String,Integer>>> resRow : rank.collect() )
-				for( Tuple2<String,Integer> top5 : resRow._2)
-					LogController.getSingletonInstance()
-						.queryOutput(
-								String.format("Giorno: %s", getNextDayToPredict(resRow._1._1)),
-								String.format("Fascia: %s",resRow._1._2),
-								String.format("Area: %s", top5._1),
-								String.format("Totale: %s", top5._2.toString())
+			Dataset<Row> dfResult = spark.createDataFrame( risultatoPrintare, resultStruct);
+			hdfs.saveDataset(dfResult, "query2");
 
-						);
+			return duration;
 
 
-		}
 	}
 
 
 
-	private static void query3() throws IOException {
+	private static long query3(SparkSession spark) throws IOException {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String[] kMeansAlgo = {"KMeansCustom", "BisectingKMeansCustom"};
 		final String pathPackage = KMeansAbstract.class.getPackage().getName();
 
 
-		SparkConf conf = new SparkConf().setAppName("Query3");
-		try (JavaSparkContext sc = new JavaSparkContext(conf)) {
-			SparkSession spark = SparkSession
-					.builder()
-					.appName("Java Spark SQL Query3")
-					.getOrCreate();
 
+
+
+			TimeHandler timeHandler = new TimeHandler();
+			timeHandler.start();
 
 			/*
 			 * prendere coppie (area, popolazione) da totale-popolazione
@@ -277,12 +292,6 @@ public class Main {
 
 			JavaRDD<Vector> dataset = areaSommVettore.map(row -> row._2);
 
-			for ( Tuple2<String, Vector> row : areaSommVettore.collect() ){
-				LogController.getSingletonInstance().queryOutput(
-						row._1,
-						row._2.toString()
-				);
-			}
 
 			// Raggruppare dati in K cluster da 2 a 5 attraverso K-Means
 			// scelgo tra i due algoritmi
@@ -325,8 +334,8 @@ public class Main {
 					);
 
 
+			return timeHandler.getDuration();
 
-		}
 
 	}
 

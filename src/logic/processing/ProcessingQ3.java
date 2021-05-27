@@ -1,4 +1,4 @@
-package logic;
+package logic.processing;
 
 import java.io.IOException;
 import java.util.Date;
