@@ -1,6 +1,39 @@
 version: '2'
 
 services:
+   hdfs-master:
+    build:
+      context: ./hdfs
+    image: hdfs-img
+    container_name: hdfs-master
+    environment:
+      - HDFS_MODE=master
+    depends_on:
+      - hdfs-worker-1
+      - hdfs-worker-2
+      - hdfs-worker-3
+    ports:
+      - 9870:9870
+
+   hdfs-worker-1:
+    build:
+      context: ./hdfs
+    image: hdfs-img
+    ports:
+      - 9864:9864
+   hdfs-worker-2:
+    build:
+      context: ./hdfs
+    image: hdfs-img
+    ports:
+      - 9863:9864
+   hdfs-worker-3:
+    build:
+      context: ./hdfs
+    image: hdfs-img
+    ports:
+      - 9862:9864
+  
    spark:
     image: docker.io/bitnami/spark:3
     container_name: spark
@@ -37,37 +70,8 @@ services:
     ports: 
       - '8085:8080' #web
     volumes:
-      - ./hdfs/config:/hdfs/config/
       - nifi:/opt/nifi/nifi-current/conf
 
-   hdfs-master:
-    build:
-      context: ./hdfs
-    image: hdfs-img
-    container_name: hdfs-master
-    environment:
-      - HDFS_MODE=master
-    depends_on:
-      - hdfs-worker-1
-      - hdfs-worker-2
-      - hdfs-worker-3
-    volumes:
-      - ./data:/input
-    ports:
-      - 9870:9870
-
-   hdfs-worker-1:
-    build:
-      context: ./hdfs
-    image: hdfs-img
-   hdfs-worker-2:
-    build:
-      context: ./hdfs
-    image: hdfs-img
-   hdfs-worker-3:
-    build:
-      context: ./hdfs
-    image: hdfs-img
 
 volumes:
   nifi:
