@@ -14,9 +14,7 @@ import utility.LogController;
 public class ProcessingQ3 {
 
     public static Dataset<Row> parseCsvTotalePopolazione(SparkSession spark){
-        Dataset<Row> df = spark.read()
-                .csv(Main.getFileTotalePopolazione());
-
+        Dataset<Row> df = Main.getHdfs().getDatasetInput("totale-popolazione.csv");
         df = df.withColumnRenamed("_c0", "area");
         df = df.withColumnRenamed("_c1", "popolazione");
 
@@ -28,9 +26,7 @@ public class ProcessingQ3 {
     public static Dataset<Row> parseCsvSomministrazioni( SparkSession spark ){
         // creo dataset con le colonne (data, area, totale) del file csv
         // successivamente ordino le entry per area e data
-        Dataset<Row> df = spark.read()
-                .csv(Main.getFileSomministrazioneVaccini());
-
+        Dataset<Row> df = Main.getHdfs().getDatasetInput("somministrazioni-vaccini-summary-latest.csv");
         df = df.withColumnRenamed("_c0", "data");
         df = df.withColumnRenamed("_c1", "area");
         df = df.withColumnRenamed("_c2", "totale");

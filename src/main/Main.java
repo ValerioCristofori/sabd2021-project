@@ -21,6 +21,7 @@ import logic.tuplecomparator.Tuple2Comparator;
 import logic.tuplecomparator.Tuple3Comparator;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.apache.spark.SparkConf;
+import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -42,38 +43,37 @@ import utility.TimeHandler;
 
 public class Main {
 
-	private static String filePuntiTipologia = "data/punti-somministrazione-tipologia.csv";
-	private static String fileSomministrazioneVaccini = "data/somministrazioni-vaccini-summary-latest.csv";
-	private static String fileSomministrazioneVacciniDonne = "data/somministrazioni-vaccini-latest.csv";
-	private static String fileTotalePopolazione = "data/totale-popolazione.csv";
-
 	private static Hdfs hdfs;
+	private static SparkSession spark;
 
-
-	public static void main(String[] args) throws SecurityException, IOException, AnalysisException {
+	public static void main(String[] args) throws SecurityException{
 		String hdfsUrl = "hdfs://hdfs-master:54310";
 
 		SparkConf conf = new SparkConf().setAppName("Project SABD");
-		try (JavaSparkContext sc = new JavaSparkContext(conf)) {
-			SparkSession spark = SparkSession
+		try ( JavaSparkContext sc = new JavaSparkContext(conf) ){
+			spark = SparkSession
 					.builder()
 					.appName("Java Spark SQL project")
 					.getOrCreate();
 
 			hdfs = Hdfs.createInstance( spark, hdfsUrl);
 
-			long duration1 = query1(spark);
-			long duration2 = query2(spark);
-			long duration3 = query3(spark);
+			long duration1 = query1();
+			long duration2 = query2();
+			long duration3 = query3(sc);
 
 
 			sc.stop();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 	}
 
 
-	private static long query1(SparkSession spark) throws SecurityException, IOException {
+	private static long query1() throws SecurityException {
 		// Q1: partendo dai file csv, per ogni mese e area, calcolare le somministrazioni medie giornaliere in un centro generico
 		// vengono considerati i dati a partire dal 2021-01-01
 
@@ -134,7 +134,7 @@ public class Main {
 	}
 	
 
-	private static long query2(SparkSession spark) throws IOException {
+	private static long query2() {
 		// Q2: partendo dal file csv, per le donne e per ogni mese,
 		// fare una classifica delle prime 5 aree per cui si prevede il maggior numero di somministrazioni il primo giorno del mese successivo
 		// si considerano i dati di un mese per predire il mese successivo (partendo da gennaio 2021)
@@ -144,95 +144,100 @@ public class Main {
 
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat simpleMonthFormat = new SimpleDateFormat("MM");
+		Date gennaioData = ProcessingQ2.getFilterDate();
+
+		List<StructField> listfields = new ArrayList<>();
+		listfields.add(DataTypes.createStructField("data", DataTypes.StringType, false));
+		listfields.add(DataTypes.createStructField("fascia", DataTypes.StringType, false));
+		listfields.add(DataTypes.createStructField("area", DataTypes.StringType, false));
+		listfields.add(DataTypes.createStructField("somministrazioni_previste", DataTypes.IntegerType, false));
+		StructType resultStruct = DataTypes.createStructType(listfields);
+
+		TimeHandler timeHandler = new TimeHandler();
+		timeHandler.start();
+
+		Dataset<SommDonne> dfSommDonne = ProcessingQ2.parseCsvSommDonne(spark);
+		JavaRDD<SommDonne> sommDonneRdd = dfSommDonne.toJavaRDD();
+		JavaPairRDD<Tuple3<Date, String, String>, Integer > datiFiltrati = sommDonneRdd.mapToPair(
+				somm -> new Tuple2<>(
+							new Tuple3<>( simpleDateFormat.parse( somm.getData() ), somm.getArea(), somm.getFascia()),
+							Integer.valueOf( somm.getTotale() )) // filtro a partire dal 2021-01-01
+				).filter( row -> !row._1._1().before( gennaioData )) // sommo i valori di somministrazione di tutte le entry con stessa chiave (diversi tipi di vaccino)
+				.reduceByKey( (tuple1,tuple2) -> tuple1+tuple2);
+
+		//result.value = il valore predetto per il mese dopo result.key._1
+		JavaPairRDD<Tuple3<String, String, String>, SimpleRegression> trainingData =
+				datiFiltrati.mapToPair(
+						row -> {
+							String month = simpleMonthFormat.format(row._1._1());
+							long epochTime = row._1._1().getTime();
+							double val = Integer.valueOf(row._2).doubleValue();
+							SimpleRegression simpleRegression = new SimpleRegression();
+							simpleRegression.addData((double) epochTime, val);
+							return new Tuple2<>(new Tuple3<>( month, row._1._2(), row._1._3()), simpleRegression);
+						}).reduceByKey( (tuple1, tuple2) -> {
+								tuple1.append(tuple2);
+								return tuple1;
+								});
 
 
+		// nella chiave: mese = mese successivo, valore = valore predetto
+		JavaPairRDD<Tuple2<String, String>, Iterable<Tuple2<String, Integer>>> risultatoGruppato =
+				trainingData.mapToPair(row ->{
+					int monthInt = Integer.parseInt(row._1._1());
+					int nextMonthInt = monthInt % 12 + 1;
+					String nextMonthString = String.valueOf(nextMonthInt);
+					String nextDay = getNextDayToPredict(nextMonthInt);
+					long epochToPredict = simpleDateFormat.parse(nextDay).getTime();
+					double predictedSomm = row._2.predict( (double)epochToPredict );
+					return new Tuple2<>(new Tuple3<>(nextMonthString,row._1._3(),Integer.valueOf( (int) Math.round( predictedSomm ))), row._1._2() );
+				}).sortByKey(
+						new Tuple3Comparator<>( Comparator.<String>naturalOrder(),
+											   Comparator.<String>naturalOrder(),
+											   Comparator.<Integer>naturalOrder()),
+						false, 1).mapToPair(row -> new Tuple2<>( new Tuple2<>( row._1._1(), row._1._2()), new Tuple2<>(
+				row._2,     // area
+				row._1._3())  // totale somministrazioni
+		)).groupByKey();
 
-			Date gennaioData = ProcessingQ2.getFilterDate();
+		JavaPairRDD<Tuple2<String, String>, ArrayList<Tuple2<String, Integer>>> rank = risultatoGruppato
+				.mapToPair( giorno_fascia -> new Tuple2<>(
+						giorno_fascia._1,
+						Lists.newArrayList(Iterables.limit(giorno_fascia._2,5))
+				)).sortByKey(
+						new Tuple2Comparator<>( Comparator.<String>naturalOrder(),
+								Comparator.<String>naturalOrder()),
+						false, 1 );
 
-			TimeHandler timeHandler = new TimeHandler();
-			timeHandler.start();
+		long duration = timeHandler.getDuration();
 
-			List<StructField> listfields = new ArrayList<>();
-			listfields.add(DataTypes.createStructField("data", DataTypes.StringType, false));
-			listfields.add(DataTypes.createStructField("fascia", DataTypes.StringType, false));
-			listfields.add(DataTypes.createStructField("area", DataTypes.StringType, false));
-			listfields.add(DataTypes.createStructField("somministrazioni_previste", DataTypes.IntegerType, false));
-			StructType resultStruct = DataTypes.createStructType(listfields);
-		
-			Dataset<SommDonne> dfSommDonne = ProcessingQ2.parseCsvSommDonne(spark);
-			JavaRDD<SommDonne> sommDonneRdd = dfSommDonne.toJavaRDD();
-			JavaPairRDD<Tuple3<Date, String, String>, Integer > datiFiltrati = sommDonneRdd.mapToPair(
-					somm -> new Tuple2<>(
-								new Tuple3<>( simpleDateFormat.parse( somm.getData() ), somm.getArea(), somm.getFascia()),
-								Integer.valueOf( somm.getTotale() )) // filtro a partire dal 2021-01-01
-					).filter( row -> !row._1._1().before( gennaioData )) // sommo i valori di somministrazione di tutte le entry con stessa chiave (diversi tipi di vaccino)
-					.reduceByKey( (tuple1,tuple2) -> tuple1+tuple2);
-
-			//result.value = il valore predetto per il mese dopo result.key._1
-			JavaPairRDD<Tuple3<String, String, String>, SimpleRegression> trainingData =
-					datiFiltrati.mapToPair(
-	                        row -> {
-	                        	String month = simpleMonthFormat.format(row._1._1());
-	                        	long epochTime = row._1._1().getTime();
-	                        	double val = Integer.valueOf(row._2).doubleValue();
-	                            SimpleRegression simpleRegression = new SimpleRegression();
-	                            simpleRegression.addData((double) epochTime, val);
-	                            return new Tuple2<>(new Tuple3<>( month, row._1._2(), row._1._3()), simpleRegression);
-	                        }).reduceByKey( (tuple1, tuple2) -> {
-									tuple1.append(tuple2);
-									return tuple1;
-									});
+		JavaRDD<Row> risultatoPrintare = rank.map( row -> RowFactory.create(row) );
 
 
-			// nella chiave: mese = mese successivo, valore = valore predetto
-			JavaPairRDD<Tuple2<String, String>, Iterable<Tuple2<String, Integer>>> risultatoGruppato =
-					trainingData.mapToPair(row ->{
-	                    int monthInt = Integer.parseInt(row._1._1());
-	                    int nextMonthInt = monthInt % 12 + 1;
-	                    String nextMonthString = String.valueOf(nextMonthInt);
-	                    String nextDay = getNextDayToPredict(nextMonthInt);
-	                    long epochToPredict = simpleDateFormat.parse(nextDay).getTime();
-	                    double predictedSomm = row._2.predict( (double)epochToPredict );
-	                    return new Tuple2<>(new Tuple3<>(nextMonthString,row._1._3(),Integer.valueOf( (int) Math.round( predictedSomm ))), row._1._2() );
-	                }).sortByKey(
-	                		new Tuple3Comparator<>( Comparator.<String>naturalOrder(),
-									               Comparator.<String>naturalOrder(),
-									               Comparator.<Integer>naturalOrder()),
-							false, 1).mapToPair(row -> new Tuple2<>( new Tuple2<>( row._1._1(), row._1._2()), new Tuple2<>(
-					row._2,     // area
-					row._1._3())  // totale somministrazioni
-			)).groupByKey();
+		Dataset<Row> dfResult = spark.createDataFrame( risultatoPrintare, resultStruct);
+		hdfs.saveDataset(dfResult, "query2");
 
-			JavaPairRDD<Tuple2<String, String>, ArrayList<Tuple2<String, Integer>>> rank = risultatoGruppato
-					.mapToPair( giorno_fascia -> new Tuple2<>(
-							giorno_fascia._1,
-							Lists.newArrayList(Iterables.limit(giorno_fascia._2,5))
-					)).sortByKey(
-							new Tuple2Comparator<>( Comparator.<String>naturalOrder(),
-									Comparator.<String>naturalOrder()),
-							false, 1 );
-
-			long duration = timeHandler.getDuration();
-
-			JavaRDD<Row> risultatoPrintare = rank.map( row -> RowFactory.create(row) );
-
-
-			Dataset<Row> dfResult = spark.createDataFrame( risultatoPrintare, resultStruct);
-			hdfs.saveDataset(dfResult, "query2");
-
-			return duration;
+		return duration;
 
 
 	}
 
 
 
-	private static long query3(SparkSession spark) throws IOException {
+	private static long query3(JavaSparkContext sc) throws IOException {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String[] kMeansAlgo = {"KMeansCustom", "BisectingKMeansCustom"};
 		final String pathPackage = KMeansAbstract.class.getPackage().getName();
 
-
+		List<StructField> listfields = new ArrayList<>();
+		listfields.add(DataTypes.createStructField("algoritmo", DataTypes.StringType, false));
+		listfields.add(DataTypes.createStructField("k_usato", DataTypes.IntegerType, false));
+		listfields.add(DataTypes.createStructField("costo", DataTypes.DoubleType, false));
+		listfields.add(DataTypes.createStructField("wssse", DataTypes.DoubleType, false));
+		listfields.add(DataTypes.createStructField("area", DataTypes.StringType, false));
+		listfields.add(DataTypes.createStructField("percentuale_somministrazioni", DataTypes.DoubleType, false));
+		listfields.add(DataTypes.createStructField("k_predetto", DataTypes.IntegerType, false));
+		StructType resultStruct = DataTypes.createStructType(listfields);
 
 
 
@@ -327,35 +332,21 @@ public class Main {
 				}
 			}
 
-			for( Tuple2<Tuple4<String,Integer,Double,Double>,JavaRDD<Tuple3<String,Double,Integer>>> entry : result )
-				for( Tuple3<String,Double,Integer> areaEntry : entry._2.collect())
-					LogController.getSingletonInstance().queryOutput(
-							entry._1._1(),entry._1._2().toString(),areaEntry._1(),areaEntry._2().toString(),areaEntry._3().toString(), entry._1._3().toString(), entry._1._4().toString()
-					);
+			long duration = timeHandler.getDuration();
+
+			JavaRDD<Row> risultatoPrintare = sc.parallelize( result ).map( row -> RowFactory.create(row) );
+			Dataset<Row> dfResult = spark.createDataFrame( risultatoPrintare, resultStruct);
+			hdfs.saveDataset(dfResult, "query2");
 
 
-			return timeHandler.getDuration();
+			return duration;
 
 
 	}
 
 
-	public static String getFilePuntiTipologia() {
-		return filePuntiTipologia;
-	}
-
-
-	public static String getFileSomministrazioneVaccini() {
-		return fileSomministrazioneVaccini;
-	}
-
-
-	public static String getFileSomministrazioneVacciniDonne() {
-		return fileSomministrazioneVacciniDonne;
-	}
-
-	public static String getFileTotalePopolazione() {
-		return fileTotalePopolazione;
+	public static Hdfs getHdfs(){
+		return hdfs;
 	}
 
 	public static String getNextDayToPredict(int month){

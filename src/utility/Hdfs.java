@@ -40,6 +40,9 @@ public class Hdfs {
                 .save(this.hdfsUrl + outputDir + "/" + filename );
     }
 
+    public Dataset<Row> getDatasetInput( String filename ){
+        return this.sparkSession.read().csv( this.hdfsUrl + inputDir + "/" + filename);
+    }
 
 
     public static Hdfs createInstance( SparkSession sparkSession, String hdfsUrl){

@@ -17,8 +17,8 @@ public class ProcessingQ2 {
 public static Dataset<SommDonne> parseCsvSommDonne(SparkSession spark ){
 		// creo dataset con le colonne (area, data, fascia, totale) dal file csv
 	    // e lo ordino per (area, fascia, data)
-		Dataset<Row> df = spark.read()
-				.csv(Main.getFileSomministrazioneVacciniDonne());
+		Dataset<Row> df = Main.getHdfs().getDatasetInput("somministrazioni-vaccini-latest.csv");
+
 
 		df = df.withColumnRenamed("_c2", "area");
 		df = df.withColumnRenamed("_c0", "data");

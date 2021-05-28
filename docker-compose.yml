@@ -31,6 +31,15 @@ services:
     depends_on:
       - spark
 
+   nifi:
+    image: docker.io/apache/nifi
+    container_name: nifi
+    ports: 
+      - '8085:8080' #web
+    volumes:
+      - ./hdfs/config:/hdfs/config/
+      - nifi:/opt/nifi/nifi-current/conf
+
    hdfs-master:
     build:
       context: ./hdfs
@@ -38,35 +47,29 @@ services:
     container_name: hdfs-master
     environment:
       - HDFS_MODE=master
-      - 'HDFS_WORKERS=hdfs-worker-1,hdfs-worker-2,hdfs-worker-3'
     depends_on:
       - hdfs-worker-1
       - hdfs-worker-2
       - hdfs-worker-3
     volumes:
-      - ./data:/data
+      - ./data:/input
     ports:
-      - 54310:54310
       - 9870:9870
 
    hdfs-worker-1:
     build:
       context: ./hdfs
     image: hdfs-img
-    environment:
-      - HDFS_MODE=worker
    hdfs-worker-2:
     build:
       context: ./hdfs
     image: hdfs-img
-    environment:
-      - HDFS_MODE=worker
    hdfs-worker-3:
     build:
       context: ./hdfs
     image: hdfs-img
-    environment:
-      - HDFS_MODE=worker
 
+volumes:
+  nifi:
 
 

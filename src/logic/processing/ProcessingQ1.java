@@ -28,9 +28,7 @@ public class ProcessingQ1 {
 	
 	public static Dataset<Row> parseCsvCentri( SparkSession spark ){
 		// creo dataset con le colonne (area, denominazione_struttra) del file csv
-		Dataset<Row> df = spark.read()
-				.csv(Main.getFilePuntiTipologia());
-		
+		Dataset<Row> df = Main.getHdfs().getDatasetInput("punti-somministrazione-tipologia.csv");
 		df = df.withColumnRenamed("_c0", "area");
 		df = df.withColumnRenamed("_c1", "denominazione_struttura");
 		df = df.select( "area", "denominazione_struttura" );
@@ -40,9 +38,8 @@ public class ProcessingQ1 {
 	public static Dataset<Row> parseCsvSomministrazioni( SparkSession spark ){
 		// creo dataset con le colonne (data, area, totale) del file csv
 		// successivamente ordino le entry per area e data
-		Dataset<Row> df = spark.read()
-				.csv(Main.getFileSomministrazioneVaccini());
-		
+		Dataset<Row> df = Main.getHdfs().getDatasetInput("somministrazioni-vaccini-summary-latest.csv");
+
 		df = df.withColumnRenamed("_c0", "data");
 		df = df.withColumnRenamed("_c1", "area");
 		df = df.withColumnRenamed("_c2", "totale");
