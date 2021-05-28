@@ -1,6 +1,5 @@
 #!/bin/bash
-: ${HADOOP_PREFIX:=/usr/local/hadoop}
-sudo $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
+
 
 service ssh start
 
@@ -20,6 +19,6 @@ $HADOOP_HDFS_HOME/sbin/start-dfs.sh;
 hdfs dfs -mkdir input
 hdfs dfs -mkdir output
 hdfs dfs -chown spark:spark /output
-
+hdfs dfs -chown nifi:nifi /input
 
 /bin/bash

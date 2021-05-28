@@ -1,5 +1,6 @@
 package utility;
 
+import au.com.bytecode.opencsv.CSVWriter;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.spark.sql.Dataset;
@@ -7,7 +8,10 @@ import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SaveMode;
 import org.apache.spark.sql.SparkSession;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Hdfs {
@@ -48,5 +52,18 @@ public class Hdfs {
     public static Hdfs createInstance( SparkSession sparkSession, String hdfsUrl){
         if( instance == null ) instance = new Hdfs( sparkSession, hdfsUrl);
         return instance;
+    }
+
+    public void saveDurations(long duration1, long duration2, long duration3) {
+        String[] head = {"query1", "query2", "query3"};
+        String[] record = { String.valueOf(duration1), String.valueOf(duration2), String.valueOf(duration3)};
+        List<String[]> data = new ArrayList<>();
+        data.add(head);
+        data.add(record);
+        try (CSVWriter writer = new CSVWriter(new FileWriter(this.hdfsUrl + outputDir + "/time-queries.csv"))) {
+            writer.writeAll(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -59,9 +59,10 @@ public class Main {
 			hdfs = Hdfs.createInstance( spark, hdfsUrl);
 
 			long duration1 = query1();
-			long duration2 = query2();
-			long duration3 = query3(sc);
+			long duration2 = query2(sc);
+			long duration3 = query3();
 
+			hdfs.saveDurations( duration1, duration2, duration3 );
 
 			sc.stop();
 		} catch (SecurityException e) {
@@ -121,7 +122,7 @@ public class Main {
 
 			long duration = timeHandler.getDuration();
 
-			JavaRDD<Row> risultatoPrintare = res.map( row -> RowFactory.create(row) );
+			JavaRDD<Row> risultatoPrintare = res.map( row -> RowFactory.create(row._1,row._2._1, row._2._2) );
 			Dataset<Row> dfResult = spark.createDataFrame( risultatoPrintare, resultStruct);
 
 			hdfs.saveDataset(dfResult, "query1");
@@ -134,7 +135,7 @@ public class Main {
 	}
 	
 
-	private static long query2() {
+	private static long query2(JavaSparkContext sc) {
 		// Q2: partendo dal file csv, per le donne e per ogni mese,
 		// fare una classifica delle prime 5 aree per cui si prevede il maggior numero di somministrazioni il primo giorno del mese successivo
 		// si considerano i dati di un mese per predire il mese successivo (partendo da gennaio 2021)
@@ -211,7 +212,12 @@ public class Main {
 
 		long duration = timeHandler.getDuration();
 
-		JavaRDD<Row> risultatoPrintare = rank.map( row -> RowFactory.create(row) );
+		JavaRDD<Row> risultatoPrintare = null;
+		for( Tuple2<Tuple2<String, String>, ArrayList<Tuple2<String, Integer>>> tuple : rank.collect() ){
+
+			JavaRDD<Row> risultatoArea = sc.parallelize(tuple._2).map( row -> RowFactory.create(tuple._1._1(), tuple._1._2(), row._1(),row._2()));
+			risultatoPrintare.union(risultatoArea);
+		}
 
 
 		Dataset<Row> dfResult = spark.createDataFrame( risultatoPrintare, resultStruct);
@@ -224,7 +230,7 @@ public class Main {
 
 
 
-	private static long query3(JavaSparkContext sc) throws IOException {
+	private static long query3() throws IOException {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String[] kMeansAlgo = {"KMeansCustom", "BisectingKMeansCustom"};
 		final String pathPackage = KMeansAbstract.class.getPackage().getName();
@@ -333,10 +339,14 @@ public class Main {
 			}
 
 			long duration = timeHandler.getDuration();
+			JavaRDD<Row> risultatoPrintare = null;
+			for( Tuple2<Tuple4<String,Integer,Double,Double>,JavaRDD<Tuple3<String,Double,Integer>>> tuple : result ){
+				JavaRDD<Row> risultatoArea = tuple._2.map( row -> RowFactory.create(tuple._1._1(), tuple._1._2(),tuple._1._3(), tuple._1._4(), row._1(),row._2(),row._3()));
+				risultatoPrintare.union(risultatoArea);
+			}
 
-			JavaRDD<Row> risultatoPrintare = sc.parallelize( result ).map( row -> RowFactory.create(row) );
 			Dataset<Row> dfResult = spark.createDataFrame( risultatoPrintare, resultStruct);
-			hdfs.saveDataset(dfResult, "query2");
+			hdfs.saveDataset(dfResult, "query3");
 
 
 			return duration;
