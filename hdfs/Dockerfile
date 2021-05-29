@@ -7,14 +7,17 @@ USER root
 
 # install dev tools
 RUN apt-get update
-RUN apt-get install -y curl tar sudo openssh-server rsync openjdk-11-jre-headless vim bash wget net-tools
+RUN apt-get install -y curl tar sudo openssh-server openssh-client rsync openjdk-11-jre-headless vim bash wget net-tools
 
 # passwordless ssh
+RUN mkdir -p /root/.ssh
 RUN ssh-keygen -q -N "" -t rsa -f /root/.ssh/id_rsa 
 RUN cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
+ADD config/ssh_config /root/.ssh/config
+RUN chmod 600 /root/.ssh/config
 
 # # java
-ENV JAVA_HOME /usr/lib/jvm/default-java
+ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk
 ENV PATH $PATH:$JAVA_HOME/bin
 
 # # hadoop
@@ -48,8 +51,7 @@ RUN chmod 600 /root/.ssh/config
 RUN chown root:root /root/.ssh/config
 # 
 ADD config/bootstrap.sh /usr/local/bootstrap.sh
-RUN chown root:root /usr/local/bootstrap.sh
-RUN chmod 700 /usr/local/bootstrap.sh
+RUN chmod 755 /usr/local/bootstrap.sh
 # 
 ENV BOOTSTRAP /usr/local/bootstrap.sh
 # 
