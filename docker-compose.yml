@@ -9,6 +9,8 @@ services:
     environment:
       - WHOAMI=master
       - 'HDFS_WORKERS=slave1,slave2,slave3'
+    networks:
+      - spark-net
     depends_on:
       - slave1
       - slave2
@@ -81,9 +83,11 @@ services:
     image: docker.io/apache/nifi
     container_name: nifi
     ports: 
-      - '8085:8080' #web
+     - '8085:8080' #web
+    networks:
+      - spark-net
     volumes:
-      - nifi:/opt/nifi/nifi-current/conf
+      - ./nifi:/opt/nifi/nifi-current/conf
 
 
 volumes:

@@ -17,7 +17,7 @@ ADD config/ssh_config /root/.ssh/config
 RUN chmod 600 /root/.ssh/config
 
 # # java
-ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk
+ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
 ENV PATH $PATH:$JAVA_HOME/bin
 
 # # hadoop
