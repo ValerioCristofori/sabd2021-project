@@ -20,12 +20,10 @@ public static Dataset<SommDonne> parseCsvSommDonne(SparkSession spark ){
 		Dataset<Row> df = Main.getHdfs().getDatasetInput("somministrazioni-vaccini-latest.csv");
 
 
-		df = df.withColumnRenamed("_c2", "area");
-		df = df.withColumnRenamed("_c0", "data");
-		//df =df.withColumn("mese_giorno", (df.col("data")).substr(6, 5));
-
-		df = df.withColumnRenamed("_c3", "fascia");
-		df = df.withColumnRenamed("_c5", "totale");
+		df = df.withColumnRenamed("_c0", "area");
+		df = df.withColumnRenamed("_c1", "data");
+		df = df.withColumnRenamed("_c2", "fascia");
+		df = df.withColumnRenamed("_c3", "totale");
 
 		df = df.select( "data","area", "fascia", "totale" ).orderBy("area", "fascia", "data").toDF();
 

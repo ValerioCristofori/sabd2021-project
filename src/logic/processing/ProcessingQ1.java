@@ -40,8 +40,8 @@ public class ProcessingQ1 {
 		// successivamente ordino le entry per area e data
 		Dataset<Row> df = Main.getHdfs().getDatasetInput("somministrazioni-vaccini-summary-latest.csv");
 
-		df = df.withColumnRenamed("_c0", "data");
-		df = df.withColumnRenamed("_c1", "area");
+		df = df.withColumnRenamed("_c1", "data");
+		df = df.withColumnRenamed("_c0", "area");
 		df = df.withColumnRenamed("_c2", "totale");
 		df = df.select( "data", "area", "totale" );
 		df = df.sort("area", "data");

@@ -366,12 +366,6 @@ public class Main {
 		return "2021-" + month + "-01";
 	}
 
-	public static String getNextDayToPredict(String month){
-		if( Integer.valueOf(month)<10){
-			return "2021-0" + month + "-01";
-		}
-		return "2021-" + month + "-01";
-	}
 
 
 }
