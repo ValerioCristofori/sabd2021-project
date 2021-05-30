@@ -7,7 +7,7 @@ USER root
 
 # install dev tools
 RUN apt-get update
-RUN apt-get install -y curl tar sudo openssh-server openssh-client rsync openjdk-11-jre-headless vim bash wget net-tools
+RUN apt-get install -y tar openssh-server openssh-client openjdk-8-jre-headless bash wget net-tools
 
 # passwordless ssh
 RUN mkdir -p /root/.ssh
@@ -17,7 +17,7 @@ ADD config/ssh_config /root/.ssh/config
 RUN chmod 600 /root/.ssh/config
 
 # # java
-ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/default-java
 ENV PATH $PATH:$JAVA_HOME/bin
 
 # # hadoop
@@ -44,11 +44,11 @@ ENV YARN_NODEMANAGER_USER "root"
 ADD config/hadoop-env.sh $HADOOP_HOME/etc/hadoop/hadoop-env.sh
 ADD config/core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml
 ADD config/hdfs-site.xml $HADOOP_HOME/etc/hadoop/hdfs-site.xml
-ADD config/workers $HADOOP_HOME/etc/hadoop/workers
+#ADD config/workers $HADOOP_HOME/etc/hadoop/workers
 # 
-ADD config/ssh_config /root/.ssh/config
-RUN chmod 600 /root/.ssh/config
-RUN chown root:root /root/.ssh/config
+#ADD config/ssh_config /root/.ssh/config
+#RUN chmod 600 /root/.ssh/config
+#RUN chown root:root /root/.ssh/config
 # 
 ADD config/bootstrap.sh /usr/local/bootstrap.sh
 RUN chmod 755 /usr/local/bootstrap.sh

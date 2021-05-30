@@ -8,14 +8,14 @@ if [[ -n "${HDFS_WORKERS}" ]]; then
 	for worker in "${WORKERS[@]}"; do
 		echo $worker >> $HADOOP_HOME/etc/hadoop/workers;
 	done
+	echo "Nodi slave configurati"
 fi
 
 if [[ "${WHOAMI}" == "master" ]]; then
-	echo "Start nodo master";
 	hdfs namenode -format; # delete all content of hdfs
 	$HADOOP_HDFS_HOME/sbin/start-dfs.sh;
-	hdfs dfs -mkdir input
-	hdfs dfs -mkdir output
+	hdfs dfs -mkdir /input
+	hdfs dfs -mkdir /output
 	hdfs dfs -chown spark:spark /output
 	hdfs dfs -chown nifi:nifi /input
 	echo "Nodo master configurato"
