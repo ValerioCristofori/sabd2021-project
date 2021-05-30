@@ -45,12 +45,14 @@ public class Main {
 
 	private static Hdfs hdfs;
 	private static SparkSession spark;
+	private static JavaSparkContext sc;
 
 	public static void main(String[] args) throws SecurityException{
 		String hdfsUrl = "hdfs://hdfs-master:54310";
 
 		SparkConf conf = new SparkConf().setAppName("Project SABD");
-		try ( JavaSparkContext sc = new JavaSparkContext(conf) ){
+		try{
+			sc = new JavaSparkContext(conf);
 			spark = SparkSession
 					.builder()
 					.appName("Java Spark SQL project")
@@ -59,10 +61,12 @@ public class Main {
 			hdfs = Hdfs.createInstance( spark, hdfsUrl);
 
 			long duration1 = query1();
-			long duration2 = query2(sc);
+			long duration2 = query2();
 			long duration3 = query3();
 
 			hdfs.saveDurations( duration1, duration2, duration3 );
+
+			LogController.getSingletonInstance().saveMess("[*]Uscita da programma...");
 
 			sc.stop();
 		} catch (SecurityException e) {
@@ -125,7 +129,7 @@ public class Main {
 			JavaRDD<Row> risultatoPrintare = res.map( row -> RowFactory.create(row._1,row._2._1, row._2._2) );
 			Dataset<Row> dfResult = spark.createDataFrame( risultatoPrintare, resultStruct);
 
-			hdfs.saveDataset(dfResult, "query1");
+			hdfs.saveDataset(dfResult, "query1.csv");
 
 			return duration;
 
@@ -135,7 +139,7 @@ public class Main {
 	}
 	
 
-	private static long query2(JavaSparkContext sc) {
+	private static long query2() {
 		// Q2: partendo dal file csv, per le donne e per ogni mese,
 		// fare una classifica delle prime 5 aree per cui si prevede il maggior numero di somministrazioni il primo giorno del mese successivo
 		// si considerano i dati di un mese per predire il mese successivo (partendo da gennaio 2021)
@@ -213,15 +217,19 @@ public class Main {
 		long duration = timeHandler.getDuration();
 
 		JavaRDD<Row> risultatoPrintare = null;
-		for( Tuple2<Tuple2<String, String>, ArrayList<Tuple2<String, Integer>>> tuple : rank.collect() ){
+		for( int i=0; i < rank.collect().size(); i++ ){
+			Tuple2<Tuple2<String, String>, ArrayList<Tuple2<String, Integer>>> tuple = rank.collect().get(i);
+			if( i == 0 ) risultatoPrintare = sc.parallelize(tuple._2).map( row -> RowFactory.create(tuple._1._1(), tuple._1._2(), row._1(),row._2()));
+			else{
+				JavaRDD<Row> risultatoArea = sc.parallelize(tuple._2).map( row -> RowFactory.create(tuple._1._1(), tuple._1._2(), row._1(),row._2()));
+				risultatoPrintare.union(risultatoArea);
+			}
 
-			JavaRDD<Row> risultatoArea = sc.parallelize(tuple._2).map( row -> RowFactory.create(tuple._1._1(), tuple._1._2(), row._1(),row._2()));
-			risultatoPrintare.union(risultatoArea);
 		}
 
 
 		Dataset<Row> dfResult = spark.createDataFrame( risultatoPrintare, resultStruct);
-		hdfs.saveDataset(dfResult, "query2");
+		hdfs.saveDataset(dfResult, "query2.csv");
 
 		return duration;
 
@@ -340,13 +348,19 @@ public class Main {
 
 			long duration = timeHandler.getDuration();
 			JavaRDD<Row> risultatoPrintare = null;
-			for( Tuple2<Tuple4<String,Integer,Double,Double>,JavaRDD<Tuple3<String,Double,Integer>>> tuple : result ){
-				JavaRDD<Row> risultatoArea = tuple._2.map( row -> RowFactory.create(tuple._1._1(), tuple._1._2(),tuple._1._3(), tuple._1._4(), row._1(),row._2(),row._3()));
-				risultatoPrintare.union(risultatoArea);
+			for( int i=0; i < result.size(); i++ ) {
+				Tuple2<Tuple4<String, Integer, Double, Double>, JavaRDD<Tuple3<String, Double, Integer>>> tuple = result.get(i);
+				if (i == 0)
+					risultatoPrintare = tuple._2.map(row -> RowFactory.create(tuple._1._1(), tuple._1._2(), tuple._1._3(), tuple._1._4(), row._1(), row._2(), row._3()));
+				else {
+					JavaRDD<Row> risultatoArea = tuple._2.map(row -> RowFactory.create(tuple._1._1(), tuple._1._2(), tuple._1._3(), tuple._1._4(), row._1(), row._2(), row._3()));
+					risultatoPrintare.union(risultatoArea);
+				}
+
 			}
 
 			Dataset<Row> dfResult = spark.createDataFrame( risultatoPrintare, resultStruct);
-			hdfs.saveDataset(dfResult, "query3");
+			hdfs.saveDataset(dfResult, "query3.csv");
 
 
 			return duration;

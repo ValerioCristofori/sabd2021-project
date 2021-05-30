@@ -46,8 +46,10 @@ services:
       - '9862:9864'
   
    spark:
-    image: docker.io/bitnami/spark:3
+    image: spark-img
     container_name: spark
+    build:
+      context: ./
     environment:
       - SPARK_MODE=master
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
@@ -60,11 +62,14 @@ services:
       - '8080:8080' #web
       - '7077:7077'
       - '4040:4040' 
-    volumes:
-      - ./target:/src
+    depends_on:
+      - nifi
 
    spark-worker:
-    image: docker.io/bitnami/spark:3
+    image: spark-img
+    container_name: spark-worker
+    build:
+      context: ./
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark:7077
@@ -87,12 +92,13 @@ services:
     networks:
       - spark-net
     volumes:
+      - ./nifi/conf:/opt/nifi/nifi-current/conf
       - ./hdfs/config:/hdfs/config/
-      - nifi-archive:/opt/nifi/nifi-current/conf/archive
+      - archive:/opt/nifi/nifi-current/conf/archive
 
 
 volumes:
-  nifi-archive:
+  archive:
 
 networks:
   spark-net:
