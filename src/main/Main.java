@@ -21,7 +21,6 @@ import logic.tuplecomparator.Tuple2Comparator;
 import logic.tuplecomparator.Tuple3Comparator;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.apache.spark.SparkConf;
-import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -38,7 +37,6 @@ import org.apache.spark.sql.types.StructType;
 import scala.*;
 
 import utility.Hdfs;
-import utility.LogController;
 import utility.TimeHandler;
 
 public class Main {
@@ -64,9 +62,7 @@ public class Main {
 			long duration2 = query2();
 			long duration3 = query3();
 
-			hdfs.saveDurations( duration1, duration2, duration3 );
-
-			LogController.getSingletonInstance().saveMess("[*]Uscita da programma...");
+			hdfs.saveDurations( duration1, duration2, duration3);
 
 			sc.stop();
 		} catch (SecurityException e) {
