@@ -42,7 +42,7 @@ public class Hdfs {
     public void saveDataset(Dataset<Row> df, String filename) {
         df.write()
                 .format("csv")
-                .option("header", true)
+                .option("header", false)
                 .mode(SaveMode.Overwrite)
                 .save(this.hdfsUrl + outputDir + "/" + filename);
     }
