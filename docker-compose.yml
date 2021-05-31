@@ -17,6 +17,8 @@ services:
       - slave3
     ports:
       - '9870:9870'
+    volumes:
+      - results:/hadoop/dfs
    slave1:
     build:
       context: ./hdfs
@@ -99,6 +101,7 @@ services:
 
 volumes:
   archive:
+  results:
 
 networks:
   spark-net:
