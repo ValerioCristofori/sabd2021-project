@@ -68,7 +68,7 @@ public class Hdfs {
                 .format("csv")
                 .option("header", true)
                 .mode(SaveMode.Overwrite)
-                .save(this.hdfsUrl + outputDir + "/time-queries.csv");
+                .save(this.hdfsUrl + outputDir + "/time-queries");
     }
 
 

@@ -109,7 +109,7 @@ public class Main {
 				Tuple2<Integer,Integer> val = tuple._2;
 				Integer totale = val._1;
 				Integer count = val._2;
-				Tuple2<Tuple2<String,String>, Float> avg = new Tuple2<>( tuple._1, Float.valueOf( (float)totale/count) );
+				Tuple2<Tuple2<String,String>, Float> avg = new Tuple2<>( tuple._1, Float.valueOf( (float)+totale/count) );
 				return avg;
 			});
 			JavaPairRDD<String,Tuple2<String,Float>> res = avgRdd.mapToPair( row -> new Tuple2<>(row._1._1, new Tuple2<>(row._1._2, row._2) ) )
@@ -125,7 +125,7 @@ public class Main {
 			JavaRDD<Row> risultatoPrintare = res.map( row -> RowFactory.create(row._1,row._2._1, row._2._2) );
 			Dataset<Row> dfResult = spark.createDataFrame( risultatoPrintare, resultStruct);
 
-			hdfs.saveDataset(dfResult, "query1.csv");
+			hdfs.saveDataset(dfResult, "query1");
 
 			return duration;
 
@@ -218,14 +218,14 @@ public class Main {
 			if( i == 0 ) risultatoPrintare = sc.parallelize(tuple._2).map( row -> RowFactory.create(tuple._1._1(), tuple._1._2(), row._1(),row._2()));
 			else{
 				JavaRDD<Row> risultatoArea = sc.parallelize(tuple._2).map( row -> RowFactory.create(tuple._1._1(), tuple._1._2(), row._1(),row._2()));
-				risultatoPrintare.union(risultatoArea);
+				risultatoPrintare = risultatoPrintare.union(risultatoArea);
 			}
 
 		}
 
 
 		Dataset<Row> dfResult = spark.createDataFrame( risultatoPrintare, resultStruct);
-		hdfs.saveDataset(dfResult, "query2.csv");
+		hdfs.saveDataset(dfResult, "query2");
 
 		return duration;
 
@@ -350,13 +350,13 @@ public class Main {
 					risultatoPrintare = tuple._2.map(row -> RowFactory.create(tuple._1._1(), tuple._1._2(), tuple._1._3(), tuple._1._4(), row._1(), row._2(), row._3()));
 				else {
 					JavaRDD<Row> risultatoArea = tuple._2.map(row -> RowFactory.create(tuple._1._1(), tuple._1._2(), tuple._1._3(), tuple._1._4(), row._1(), row._2(), row._3()));
-					risultatoPrintare.union(risultatoArea);
+					risultatoPrintare = risultatoPrintare.union(risultatoArea);
 				}
 
 			}
 
 			Dataset<Row> dfResult = spark.createDataFrame( risultatoPrintare, resultStruct);
-			hdfs.saveDataset(dfResult, "query3.csv");
+			hdfs.saveDataset(dfResult, "query3");
 
 
 			return duration;
