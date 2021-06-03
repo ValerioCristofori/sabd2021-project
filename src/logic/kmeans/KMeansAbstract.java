@@ -6,11 +6,10 @@ import org.apache.spark.mllib.linalg.Vector;
 import java.io.Serializable;
 
 public abstract class KMeansAbstract implements Serializable {
-
     // clusterizzo i dati in k classi usando KMeans
+    // definisco i metodi da usare nei due algoritmi
     public abstract void train (JavaRDD<Vector> dataset, Integer k, Integer iterations);
     public abstract Integer predict(Vector denseVector);
     public abstract Double getCost ();
     public abstract Double getWSSSE (JavaRDD<Vector> dataset);
-
 }

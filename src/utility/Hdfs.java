@@ -26,6 +26,7 @@ public class Hdfs {
     private String hdfsUrl;
     private FileSystem hdfs;
 
+    // costruttore
     private Hdfs(SparkSession sparkSession, String hdfsUrl) {
         this.sparkSession = sparkSession;
         this.hdfsUrl = hdfsUrl;
@@ -51,6 +52,8 @@ public class Hdfs {
         return this.sparkSession.read().csv(this.hdfsUrl + inputDir + "/" + filename);
     }
 
+    // conta il tempo per ogni query in millisecondi
+    // crea un dataset con queste istanze
     public void saveDurations(long duration1, long duration2, long duration3) {
         List<StructField> listfields = new ArrayList<>();
         listfields.add(DataTypes.createStructField("query", DataTypes.StringType, false));
@@ -71,7 +74,7 @@ public class Hdfs {
                 .save(this.hdfsUrl + outputDir + "/time-queries");
     }
 
-
+    // crea istanza HDFS
     public static Hdfs createInstance(SparkSession sparkSession, String hdfsUrl) {
         if (instance == null) instance = new Hdfs(sparkSession, hdfsUrl);
         return instance;

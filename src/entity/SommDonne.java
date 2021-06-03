@@ -3,10 +3,10 @@ package entity;
 import java.util.Date;
 
 public class SommDonne {
-    private String data; //01-01
-    private String area;
-    private String fascia;
-    private String totale;
+    private String data;    // data che specifica il giorno delle somministrazioni
+    private String area;    // regione di somministrazione
+    private String fascia;  // fascia anagrafica di riferimento
+    private String totale;  // donne vaccinate in una specifica regione in uno specifico giorno (per una fascia anagrafica, per un fornitore)
 
     public String getData() {
         return data;

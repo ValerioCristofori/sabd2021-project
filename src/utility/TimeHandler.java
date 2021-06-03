@@ -4,9 +4,9 @@ import java.time.Duration;
 import java.time.Instant;
 
 public class TimeHandler {
-    private Instant start;
-    private Instant stop;
-    private long duration;
+    private Instant start;  // sincronizza un clock per il time handler
+    private Instant stop;   // ferma il clock
+    private long duration;  // tempo passato da start a stop - poi passato in millisecondi
 
     public void start() {
         this.start = Instant.now();

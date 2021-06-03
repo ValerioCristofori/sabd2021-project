@@ -27,7 +27,8 @@ import java.util.List;
 public class ProcessingQ1 {
 	
 	public static Dataset<Row> parseCsvCentri( SparkSession spark ){
-		// creo dataset con le colonne (area, denominazione_struttra) del file csv
+		// creo dataset con le colonne (area, denominazione_struttra)
+			// dal file punti-somministrazione-tipologia.csv
 		Dataset<Row> df = Main.getHdfs().getDatasetInput("punti-somministrazione-tipologia.csv");
 		df = df.withColumnRenamed("_c0", "area");
 		df = df.withColumnRenamed("_c1", "denominazione_struttura");
@@ -36,7 +37,8 @@ public class ProcessingQ1 {
 	}
 	
 	public static Dataset<Row> parseCsvSomministrazioni( SparkSession spark ){
-		// creo dataset con le colonne (data, area, totale) del file csv
+		// creo dataset con le colonne (data, area, totale)
+			// dal file somministrazioni-vaccini-summary-latest.csv
 		// successivamente ordino le entry per area e data
 		Dataset<Row> df = Main.getHdfs().getDatasetInput("somministrazioni-vaccini-summary-latest.csv");
 
@@ -47,20 +49,15 @@ public class ProcessingQ1 {
 		df = df.sort("area", "data");
 	    return df;
 	}
-
 	
 	public static JavaPairRDD<String, Integer> getTotalCenters( Dataset<Row> df ){
 		// dal primo file csv trovo il numero di centri vaccinali per ogni area
 		JavaRDD<String> input = df.select("area").javaRDD().map(row -> (String)row.get(0));
 		
-		// Transformations
+		// trasformazioni
         JavaRDD<String> areas = input.flatMap(line -> CentriSomministrazioneParser.getArea(line).iterator());        
         JavaPairRDD<String, Integer> pairs = areas.mapToPair(area -> new Tuple2<>(area, 1));
         return pairs.reduceByKey((x, y) -> x+y);
         
 	}
-
-
-
-	
 }

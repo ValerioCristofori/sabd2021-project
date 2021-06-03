@@ -5,15 +5,11 @@ import java.time.Month;
 
 public class Somministrazione implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private String data; //data che specifica il giorno delle somministrazioni
-	private String area; //regione di somministrazione
-	private String totale; //totale delle vaccinazioni nel giorno
-	
-	
+	private String data; 	// data che specifica il giorno delle somministrazioni
+	private String area; 	// regione di somministrazione
+	private String totale; 	// totale delle vaccinazioni nel giorno
+
 	public String getArea() {
 		return area;
 	}
@@ -40,6 +36,5 @@ public class Somministrazione implements Serializable{
 	public String toString() {
 		return String.format("Area %s%nData %s%nTotale somministrazioni %s%nNumero centri %d%n%n", this.area, this.data, this.totale);
 	}
-	
 	
 }

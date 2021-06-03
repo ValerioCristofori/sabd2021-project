@@ -17,17 +17,15 @@ public class Tuple3Comparator<T1, T2, T3> implements Comparator<Tuple3<T1, T2, T
         this.comparatorT3 = comparatorT3;
     }
 
-
     @Override
     public int compare(Tuple3<T1, T2, T3> o1, Tuple3<T1, T2, T3> o2) {
         int result = this.comparatorT1.compare(o1._1(), o2._1());
-        if (result == 0) {
+        if (result == 0) {  // se o1._1 == o2._1
             result = comparatorT2.compare(o1._2(), o2._2());
-            if (result == 0) {
+            if (result == 0) {  // se anche o1._2 == o2._2
                 result = comparatorT3.compare(o1._3(), o2._3());
             }
         }
         return result;
     }
-
 }
