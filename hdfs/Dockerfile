@@ -6,8 +6,8 @@ FROM ubuntu
 USER root
 
 # install dev tools
-RUN apt-get update
-RUN apt-get install -y tar openssh-server openssh-client openjdk-8-jre-headless bash wget net-tools
+RUN apt update
+RUN apt install -y curl tar sudo openssh-server rsync openjdk-8-jre-headless vim wget
 
 # passwordless ssh
 RUN mkdir -p /root/.ssh
@@ -21,8 +21,8 @@ ENV JAVA_HOME /usr/lib/jvm/default-java
 ENV PATH $PATH:$JAVA_HOME/bin
 
 # # hadoop
-RUN wget https://downloads.apache.org/hadoop/common/hadoop-3.1.4/hadoop-3.1.4.tar.gz ; tar -zxf hadoop-3.1.4.tar.gz -C /usr/local/ ; rm hadoop-3.1.4.tar.gz
-RUN cd /usr/local && ln -s ./hadoop-3.1.4 hadoop
+RUN wget https://downloads.apache.org/hadoop/common/hadoop-3.2.2/hadoop-3.2.2.tar.gz ; tar -zxf hadoop-3.2.2.tar.gz -C /usr/local/ ; rm hadoop-3.2.2.tar.gz
+RUN cd /usr/local && ln -s ./hadoop-3.2.2 hadoop
 
 
 # 
