@@ -31,11 +31,11 @@ public static Dataset<SommDonne> parseCsvSommDonne(SparkSession spark ){
 	}
 
 public static Date getFilterDate( ) {
-	// prendo in considerazione solo istanze di date del 2021
-	Calendar gennaio2021 = Calendar.getInstance();
-	gennaio2021.set(Calendar.YEAR, 2021);
-    gennaio2021.set(Calendar.MONTH, Calendar.JANUARY);
-    gennaio2021.set(Calendar.DAY_OF_MONTH, 1);
-    return gennaio2021.getTime(); 
+	// prendo in considerazione solo istanze di date a partire dal febb 2021
+	Calendar febbraio2021 = Calendar.getInstance();
+	febbraio2021.set(Calendar.YEAR, 2021);
+	febbraio2021.set(Calendar.MONTH, Calendar.FEBRUARY);
+	febbraio2021.set(Calendar.DAY_OF_MONTH, 1);
+    return febbraio2021.getTime();
 }
 }

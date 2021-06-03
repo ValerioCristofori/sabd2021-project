@@ -1,6 +1,17 @@
 version: '2'
 
 services:
+   hbase-docker:
+    image: harisekhon/hbase:1.4
+    networks:
+      - spark-net
+    ports:
+      - '2181:2181'
+      - '8082:8080'
+      - '8085:8085'
+      - '16000:16000'
+    volumes:
+      - ./hbase/conf:/hbase-1.4.7/conf
    hdfs-master:
     build:
       context: ./hdfs

@@ -1,3 +1,0 @@
-1. aggiungere Redis/HBase
-2. fare filtraggio per query2
-3. cambiare SimpleRegression in LinearRegression per MLlib

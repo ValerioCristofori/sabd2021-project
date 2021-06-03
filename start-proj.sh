@@ -1,16 +1,10 @@
 #!/bin/bash
 
-# Automatizzare il processo di build del progetto
-mvn clean package
+# Start spark script
+./scripts/start-spark-submit.sh $1
 
-# Script per setup del HDFS per instanziare i dati
-./hdfs.sh
+# Start hdfs script for getting data
+./scripts/start-get-results.sh $2
 
-# Setup di Spark
-$SPARK_HOME/sbin/start-master.sh
-
-# Starts a slave instance on each machine specified #   in the conf/slaves file on the master node
-$SPARK_HOME/sbin/start-slave.sh 
-
-# Starts spark application
-$SPARK_HOME/bin/spark-submit --class main.Main --master "local" target/sabd-project-1.0.jar
+# Start hbase script for create tables
+./scripts/create-tables.sh $3

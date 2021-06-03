@@ -79,8 +79,7 @@ public class Main {
 		// vengono considerati i dati a partire dal 2021-01-01
 
 			List<StructField> listfields = new ArrayList<>();
-			listfields.add(DataTypes.createStructField("area", DataTypes.StringType, false));
-			listfields.add(DataTypes.createStructField("mese", DataTypes.StringType, false));
+			listfields.add(DataTypes.createStructField("chiave_composta(area::mese)", DataTypes.StringType, false));
 			listfields.add(DataTypes.createStructField("avg", DataTypes.FloatType, false));
 			StructType resultStruct = DataTypes.createStructType(listfields);
 
@@ -122,7 +121,7 @@ public class Main {
 
 			long duration = timeHandler.getDuration();
 
-			JavaRDD<Row> risultatoPrintare = res.map( row -> RowFactory.create(row._1,row._2._1, row._2._2) );
+			JavaRDD<Row> risultatoPrintare = res.map( row -> RowFactory.create(String.format("%s::%s", row._1, row._2._1), row._2._2) );
 			Dataset<Row> dfResult = spark.createDataFrame( risultatoPrintare, resultStruct);
 
 			hdfs.saveDataset(dfResult, "query1");
@@ -148,9 +147,7 @@ public class Main {
 		Date gennaioData = ProcessingQ2.getFilterDate();
 
 		List<StructField> listfields = new ArrayList<>();
-		listfields.add(DataTypes.createStructField("data", DataTypes.StringType, false));
-		listfields.add(DataTypes.createStructField("fascia", DataTypes.StringType, false));
-		listfields.add(DataTypes.createStructField("area", DataTypes.StringType, false));
+		listfields.add(DataTypes.createStructField("chiave_composta(data::fascia::area)", DataTypes.StringType, false));
 		listfields.add(DataTypes.createStructField("somministrazioni_previste", DataTypes.IntegerType, false));
 		StructType resultStruct = DataTypes.createStructType(listfields);
 
@@ -215,9 +212,9 @@ public class Main {
 		JavaRDD<Row> risultatoPrintare = null;
 		for( int i=0; i < rank.collect().size(); i++ ){
 			Tuple2<Tuple2<String, String>, ArrayList<Tuple2<String, Integer>>> tuple = rank.collect().get(i);
-			if( i == 0 ) risultatoPrintare = sc.parallelize(tuple._2).map( row -> RowFactory.create(tuple._1._1(), tuple._1._2(), row._1(),row._2()));
+			if( i == 0 ) risultatoPrintare = sc.parallelize(tuple._2).map( row -> RowFactory.create(String.format("%s::%s::%s", tuple._1._1(), tuple._1._2(),row._1()),row._2()));
 			else{
-				JavaRDD<Row> risultatoArea = sc.parallelize(tuple._2).map( row -> RowFactory.create(tuple._1._1(), tuple._1._2(), row._1(),row._2()));
+				JavaRDD<Row> risultatoArea = sc.parallelize(tuple._2).map( row -> RowFactory.create(String.format("%s::%s::%s", tuple._1._1(), tuple._1._2(),row._1()),row._2()));
 				risultatoPrintare = risultatoPrintare.union(risultatoArea);
 			}
 
@@ -240,11 +237,9 @@ public class Main {
 		final String pathPackage = KMeansAbstract.class.getPackage().getName();
 
 		List<StructField> listfields = new ArrayList<>();
-		listfields.add(DataTypes.createStructField("algoritmo", DataTypes.StringType, false));
-		listfields.add(DataTypes.createStructField("k_usato", DataTypes.IntegerType, false));
+		listfields.add(DataTypes.createStructField("chiave_composta(algo::k::area)", DataTypes.StringType, false));
 		listfields.add(DataTypes.createStructField("costo", DataTypes.DoubleType, false));
 		listfields.add(DataTypes.createStructField("wssse", DataTypes.DoubleType, false));
-		listfields.add(DataTypes.createStructField("area", DataTypes.StringType, false));
 		listfields.add(DataTypes.createStructField("percentuale_somministrazioni", DataTypes.DoubleType, false));
 		listfields.add(DataTypes.createStructField("k_predetto", DataTypes.IntegerType, false));
 		StructType resultStruct = DataTypes.createStructType(listfields);
@@ -347,9 +342,9 @@ public class Main {
 			for( int i=0; i < result.size(); i++ ) {
 				Tuple2<Tuple4<String, Integer, Double, Double>, JavaRDD<Tuple3<String, Double, Integer>>> tuple = result.get(i);
 				if (i == 0)
-					risultatoPrintare = tuple._2.map(row -> RowFactory.create(tuple._1._1(), tuple._1._2(), tuple._1._3(), tuple._1._4(), row._1(), row._2(), row._3()));
+					risultatoPrintare = tuple._2.map(row -> RowFactory.create(String.format("%s::%s::%s", tuple._1._1(),tuple._1._2(), row._1() ), tuple._1._3(), tuple._1._4(), row._2(), row._3()));
 				else {
-					JavaRDD<Row> risultatoArea = tuple._2.map(row -> RowFactory.create(tuple._1._1(), tuple._1._2(), tuple._1._3(), tuple._1._4(), row._1(), row._2(), row._3()));
+					JavaRDD<Row> risultatoArea = tuple._2.map(row -> RowFactory.create(String.format("%s::%s::%s", tuple._1._1(),tuple._1._2(), row._1() ), tuple._1._3(), tuple._1._4(), row._2(), row._3()));
 					risultatoPrintare = risultatoPrintare.union(risultatoArea);
 				}
 

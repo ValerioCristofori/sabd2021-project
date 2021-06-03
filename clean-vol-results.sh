@@ -1,3 +1,0 @@
-#!/bin/bash
-
-sudo docker exec -it $1 /bin/bash -c 'rm -rf /hadoop/dfs/merged'
