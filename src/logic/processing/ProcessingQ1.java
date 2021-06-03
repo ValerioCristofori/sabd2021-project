@@ -1,7 +1,5 @@
 package logic.processing;
 
-
-
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.Dataset;
@@ -9,20 +7,18 @@ import org.apache.spark.sql.Encoders;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
-
 import main.Main;
 import org.apache.spark.sql.types.DataTypes;
 import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
-import parser.CentriSomministrazioneParser;
 import scala.Serializable;
 import scala.Tuple2;
 import scala.Tuple3;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
 
 public class ProcessingQ1 {
 	
@@ -55,18 +51,16 @@ public class ProcessingQ1 {
 		JavaRDD<String> input = df.select("area").javaRDD().map(row -> (String)row.get(0));
 		
 		// trasformazioni
-        JavaRDD<String> areas = input.flatMap(line -> CentriSomministrazioneParser.getArea(line).iterator());        
+        JavaRDD<String> areas = input.flatMap(line -> getArea(line).iterator());
         JavaPairRDD<String, Integer> pairs = areas.mapToPair(area -> new Tuple2<>(area, 1));
         return pairs.reduceByKey((x, y) -> x+y);
 	}
 
-	public class CentriSomministrazioneParser{
-		// leggo e analizzo file csv di interesse
-		public static List<String> getArea(String csvLine) {
-			String area;
-			String[] tok = csvLine.split(",");
-			area = tok[0];
-			return Arrays.asList(area);
-		}
+	// leggo e analizzo file csv di interesse
+	public static List<String> getArea(String csvLine) {
+		String area;
+		String[] tok = csvLine.split(",");
+		area = tok[0];
+		return Arrays.asList(area);
 	}
 }
