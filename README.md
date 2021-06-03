@@ -50,3 +50,12 @@ Take the containers id of spark, hdfs-master and hbase and run on the same direc
 ```
 ./start-proj.sh ${spark-id} ${hdfs-master-id} ${hbase-id}
 ```
+
+You can run after processing
+
+```
+scan 'query1'
+scan 'query2'
+scan 'query3'
+```
+to see the results of the queries saved in hbase
