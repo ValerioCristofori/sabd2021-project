@@ -58,6 +58,15 @@ public class ProcessingQ1 {
         JavaRDD<String> areas = input.flatMap(line -> CentriSomministrazioneParser.getArea(line).iterator());        
         JavaPairRDD<String, Integer> pairs = areas.mapToPair(area -> new Tuple2<>(area, 1));
         return pairs.reduceByKey((x, y) -> x+y);
-        
+	}
+
+	public class CentriSomministrazioneParser{
+		// leggo e analizzo file csv di interesse
+		public static List<String> getArea(String csvLine) {
+			String area;
+			String[] tok = csvLine.split(",");
+			area = tok[0];
+			return Arrays.asList(area);
+		}
 	}
 }
