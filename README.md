@@ -32,6 +32,13 @@ sudo make app
 For building the .jar and setup the docker-compose env
 
 
+Clean the environment with the command
+
+```
+sudo make down
+```
+
+
 ## Interfaces
 
 * Hdfs: http://localhost:9870

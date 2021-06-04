@@ -204,7 +204,7 @@ public class Main {
 		)).groupByKey();
 
 		// creo RDD per la classifica
-		// ordino dati in ordine in una lista e prendo solo i primi cinque valori
+		// ordino datiin una lista e prendo solo i primi cinque valori
 		JavaPairRDD<Tuple2<String, String>, ArrayList<Tuple2<String, Integer>>> rank = risultatoGruppato
 				.mapToPair( giorno_fascia -> new Tuple2<>(
 						giorno_fascia._1,
@@ -314,10 +314,12 @@ public class Main {
 			// scelgo tra i due algoritmi
 			for (int i = 0; i < kMeansAlgo.length; i++){
 				try {
+					// Applico il meccanismo di reflection
 					Class<?> algoCustom = Class.forName( pathPackage + "." + kMeansAlgo[i]);
 
 				for( int k=2; k<=5; k++){
 						// opero con i metodi definiti nella classe KMeansAbstract
+						// istanzio la classe a runtime
 						KMeansAbstract kMeans = (KMeansAbstract) algoCustom.getConstructor().newInstance();
 
 						kMeans.train(dataset, Integer.valueOf(k), 20);

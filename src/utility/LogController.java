@@ -7,6 +7,8 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/* Classe Singleton per logging di dati */
+
 public class LogController {
 
 	private static final String PATH = "./logFile.log";
@@ -14,8 +16,6 @@ public class LogController {
 	private static LogController instance = null;
 	private Logger logger = Logger.getLogger( "mLogger" );
 	private FileHandler fh;
-	private static final int NUMMINUS = 35;
-	private static final String SPACE = " ";
 	
 	private LogController() throws SecurityException, IOException {
 		this.fh = new FileHandler( PATH );
