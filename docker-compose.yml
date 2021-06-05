@@ -3,6 +3,7 @@ version: '2'
 services:
    hbase-docker:
     image: harisekhon/hbase:1.4
+    container_name: hbase
     networks:
       - spark-net
     ports:

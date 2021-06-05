@@ -52,10 +52,10 @@ Check that nifi has downloaded and uploaded the files to hdfs and run
 docker ps
 ```
 
-Take the containers id of spark, hdfs-master and hbase and run on the same directory
+Then run on the same directory for starting project
 
 ```
-./start-proj.sh ${spark-id} ${hdfs-master-id} ${hbase-id}
+./start-proj.sh
 ```
 
 You can run after processing
@@ -65,4 +65,4 @@ scan 'query1'
 scan 'query2'
 scan 'query3'
 ```
-to see the results of the queries saved in hbase
+to check the results of the queries saved in Hbase
